@@ -1,6 +1,13 @@
 import os
+import sys
 import json
 from datetime import datetime
+
+# Ensure scripts directory is in python module search path
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+if CURRENT_DIR not in sys.path:
+    sys.path.insert(0, CURRENT_DIR)
+
 from scrapers.wbpsc_scraper import get_wbpsc_notices
 from scrapers.wbprb_scraper import get_wbprb_notices
 from scrapers.ssc_scraper import get_ssc_notices

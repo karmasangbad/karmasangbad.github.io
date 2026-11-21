@@ -12,8 +12,8 @@ age_limit: "সরকারি নিয়ম অনুযায়ী প্�
 last_date: "অফিশিয়াল বিজ্ঞপ্তিতে দেখুন"
 apply_mode: "অনলাইন (Online)"
 official_link: "https://prb.wb.gov.in"
-pdf_link: "https://prb.wb.gov.in/recruitments/9b380303ea68fda3"
-apply_link: "https://prb.wb.gov.in/recruitments/9b380303ea68fda3"
+pdf_link: "https://prb.wb.gov.in/uploads/recruitment/179500316179901.pdf"
+apply_link: "https://wbprb.applythrunet.co.in/"
 apply_btn_text: "কল লেটার ডাউনলোড পোর্টাল"
 summary: "West Bengal Police Recruitment Board (WBPRB): Download e-Call Letter for Personality Test for Recruitment to the post of Sub-I সংক্রান্ত নতুন অফিশিয়াল নোটিফিকেশন ও নির্দেশিকা।"
 ---

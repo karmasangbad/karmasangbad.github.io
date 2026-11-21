@@ -1,6 +1,7 @@
 import ssl
 import urllib3
 import requests
+import hashlib
 from requests.adapters import HTTPAdapter
 from bs4 import BeautifulSoup
 
@@ -12,7 +13,7 @@ class LegacySSLAdapter(HTTPAdapter):
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
         ctx.verify_mode = ssl.CERT_NONE
-        ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
+        ctx.options |= 0x4
         kwargs['ssl_context'] = ctx
         return super().init_poolmanager(*args, **kwargs)
 
@@ -36,31 +37,33 @@ def get_wbpsc_notices(limit=5):
             return notices
 
         soup = BeautifulSoup(response.text, "html.parser")
-        
-        # Look for links containing recruitment keywords
         keywords = ["recruitment", "advertisement", "indicative", "scheme", "examination", "interview", "post"]
         
         for a in soup.find_all("a", href=True):
             title = a.get_text(strip=True)
-            href = a["href"]
+            href = a["href"].strip()
 
             if len(title) > 20 and any(k in title.lower() for k in keywords):
-                # Normalize link
-                if href.startswith("Download?"):
-                    full_link = f"https://psc.wb.gov.in/{href}"
-                elif href.startswith("http"):
-                    full_link = href
+                # Clean URL and query parameters
+                href_clean = href.replace("&amp;", "&")
+                if href_clean.startswith("Download?"):
+                    full_link = f"https://psc.wb.gov.in/{href_clean}"
+                elif href_clean.startswith("http"):
+                    full_link = href_clean
                 else:
-                    full_link = f"https://psc.wb.gov.in/{href.lstrip('/')}"
+                    full_link = f"https://psc.wb.gov.in/{href_clean.lstrip('/')}"
 
-                # Unique notice ID based on title
-                notice_id = f"wbpsc_{abs(hash(title)) % 1000000}"
+                # Deterministic notice ID
+                notice_id = f"wbpsc_{hashlib.md5(title.encode('utf-8')).hexdigest()[:12]}"
                 
                 notices.append({
                     "id": notice_id,
                     "title": title,
                     "official_link": "https://psc.wb.gov.in",
                     "pdf_link": full_link,
+                    "apply_link": "https://psc.wb.gov.in",
+                    "apply_btn_text": "WBPSC অনলাইন আবেদন ও OTR পোর্টাল",
+                    "apply_status": "অনলাইন আবেদন বিজ্ঞপ্তি অনুযায়ী সক্রিয় হবে",
                     "department": "West Bengal Public Service Commission (WBPSC)",
                     "category": "পশ্চিমবঙ্গ সরকার",
                     "source": "WBPSC"

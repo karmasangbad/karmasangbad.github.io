@@ -12,8 +12,8 @@ age_limit: "সরকারি নিয়ম অনুযায়ী প্�
 last_date: "অফিশিয়াল বিজ্ঞপ্তিতে দেখুন"
 apply_mode: "অনলাইন (Online)"
 official_link: "https://prb.wb.gov.in"
-pdf_link: "https://prb.wb.gov.in/recruitments/6e50c07d61e0194f"
-apply_link: "https://prb.wb.gov.in/recruitments/6e50c07d61e0194f"
+pdf_link: "https://prb.wb.gov.in/uploads/recruitment/179457248954832.pdf"
+apply_link: "https://wbprb.applythrunet.co.in/"
 apply_btn_text: "এডমিট কার্ড ডাউনলোড পোর্টাল"
 summary: "West Bengal Police Recruitment Board (WBPRB): Download e-Admit Cards for Final Written Examination for Recruitment to the post সংক্রান্ত নতুন অফিশিয়াল নোটিফিকেশন ও নির্দেশিকা।"
 ---

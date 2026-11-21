@@ -1,13 +1,13 @@
 import ssl
 import urllib3
 import requests
+import hashlib
 from requests.adapters import HTTPAdapter
 from bs4 import BeautifulSoup
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class LegacySSLAdapter(HTTPAdapter):
-    """Adapter to handle legacy TLS renegotiation on Indian government servers."""
     def init_poolmanager(self, *args, **kwargs):
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
@@ -15,6 +15,25 @@ class LegacySSLAdapter(HTTPAdapter):
         ctx.options |= 0x4
         kwargs['ssl_context'] = ctx
         return super().init_poolmanager(*args, **kwargs)
+
+def get_direct_pdf_link(session, recruitment_url, headers):
+    """Fetches the inner recruitment page to extract the direct .pdf download link."""
+    try:
+        res = session.get(recruitment_url, headers=headers, timeout=10)
+        if res.status_code == 200:
+            soup = BeautifulSoup(res.text, "html.parser")
+            for a in soup.find_all("a", href=True):
+                href = a["href"].strip()
+                if href.lower().endswith(".pdf") or "/uploads/recruitment/" in href:
+                    if href.startswith("/"):
+                        return f"https://prb.wb.gov.in{href}"
+                    elif href.startswith("http"):
+                        return href
+                    else:
+                        return f"https://prb.wb.gov.in/{href}"
+    except Exception as e:
+        print(f"[WBPRB] Inner page PDF fetch error: {e}")
+    return recruitment_url
 
 def get_wbprb_notices(limit=5):
     """
@@ -40,23 +59,47 @@ def get_wbprb_notices(limit=5):
 
         for a in soup.find_all("a", href=True):
             title = a.get_text(strip=True)
-            href = a["href"]
+            href = a["href"].strip()
 
             if len(title) > 20 and any(k in title.lower() for k in keywords):
                 if href.startswith("/"):
-                    full_link = f"https://prb.wb.gov.in{href}"
+                    recruitment_url = f"https://prb.wb.gov.in{href}"
                 elif href.startswith("http"):
-                    full_link = href
+                    recruitment_url = href
                 else:
-                    full_link = f"https://prb.wb.gov.in/{href}"
+                    recruitment_url = f"https://prb.wb.gov.in/{href}"
 
-                notice_id = f"wbprb_{abs(hash(title)) % 1000000}"
+                # Extract the real direct PDF
+                pdf_direct_url = get_direct_pdf_link(session, recruitment_url, headers)
+
+                title_lower = title.lower()
+                is_admit = "admit" in title_lower or "call letter" in title_lower
+                is_result = "result" in title_lower or "merit" in title_lower
+
+                if is_admit:
+                    btn_text = "এডমিট কার্ড ডাউনলোড লিঙ্ক"
+                    apply_link = "https://wbprb.applythrunet.co.in/"
+                    apply_status = ""
+                elif is_result:
+                    btn_text = "ফলাফল চেক করার পোর্টাল"
+                    apply_link = recruitment_url
+                    apply_status = ""
+                else:
+                    btn_text = "অনলাইনে সরাসরি আবেদন করুন"
+                    apply_link = "https://wbprb.applythrunet.co.in/"
+                    apply_status = ""
+
+                # Deterministic MD5 ID
+                notice_id = f"wbprb_{hashlib.md5(title.encode('utf-8')).hexdigest()[:12]}"
 
                 notices.append({
                     "id": notice_id,
                     "title": title,
                     "official_link": "https://prb.wb.gov.in",
-                    "pdf_link": full_link,
+                    "pdf_link": pdf_direct_url,
+                    "apply_link": apply_link,
+                    "apply_btn_text": btn_text,
+                    "apply_status": apply_status,
                     "department": "West Bengal Police Recruitment Board (WBPRB)",
                     "category": "পুলিশ ও ডিফেন্স",
                     "source": "WBPRB"
@@ -74,4 +117,4 @@ if __name__ == "__main__":
     results = get_wbprb_notices()
     print(f"Found {len(results)} WBPRB notices:")
     for r in results:
-        print(f"- {r['title']} -> {r['pdf_link']}")
+        print(f"- {r['title']} -> PDF: {r['pdf_link']}")
