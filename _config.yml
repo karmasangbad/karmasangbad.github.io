@@ -1,0 +1,34 @@
+# Site Settings
+title: "চাকরির খবর (KarmaSangbad) - পশ্চিমবঙ্গ ও কেন্দ্রীয় সরকারি চাকরি"
+description: "প্রতিদিনের পশ্চিমবঙ্গ ও কেন্দ্রীয় সরকারি চাকরির খবর, অফিশিয়াল নোটিফিকেশন এবং বাংলায় অনলাইনে আবেদনের সম্পূর্ণ নির্দেশিকা।"
+url: "https://yourusername.github.io" # Replace with your GitHub Pages URL
+baseurl: "" # Leave empty if using custom domain or username.github.io, or set to /repo-name
+
+# Author & Contact
+author:
+  name: "KarmaSangbad Team"
+  email: "contact@example.com"
+  telegram: "https://t.me/your_telegram_channel"
+  whatsapp: "https://whatsapp.com/channel/your_channel"
+
+# Build Settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Collections & Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Exclude from processing
+exclude:
+  - scripts/
+  - requirements.txt
+  - README.md
+  - .github/
+  - .gitignore

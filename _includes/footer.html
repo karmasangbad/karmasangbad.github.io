@@ -1,0 +1,44 @@
+<footer class="bg-slate-900 text-slate-300 mt-16 pt-10 pb-8 border-t border-slate-800">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <!-- About Section -->
+    <div>
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded bg-emerald-600 text-white flex items-center justify-center font-bold text-base">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <span class="text-lg font-bold text-white">চাকরির খবর (KarmaSangbad)</span>
+      </div>
+      <p class="text-sm text-slate-400 leading-relaxed">
+        পশ্চিমবঙ্গ এবং কেন্দ্রীয় সরকারের সমস্ত নতুন চাকরির খবর, অফিসিয়াল নোটিফিকেশন ও অনলাইনে আবেদনের সঠিক নিয়ম বাংলায় সহজভাবে তুলে ধরার বিশ্বস্ত মাধ্যম।
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-white font-bold text-base mb-3 border-b border-slate-700 pb-1">গুরুত্বপূর্ণ বিভাগ</h3>
+      <ul class="text-sm space-y-2 text-slate-400">
+        <li><a href="{{ site.baseurl }}/" class="hover:text-emerald-400 transition"><i class="fas fa-chevron-right text-xs mr-1"></i> সমস্ত চাকরির খবর</a></li>
+        <li><a href="{{ site.baseurl }}/#wb-jobs" class="hover:text-emerald-400 transition"><i class="fas fa-chevron-right text-xs mr-1"></i> পশ্চিমবঙ্গ সরকারের চাকরি (WBPSC/WBPRB)</a></li>
+        <li><a href="{{ site.baseurl }}/#central-jobs" class="hover:text-emerald-400 transition"><i class="fas fa-chevron-right text-xs mr-1"></i> কেন্দ্রীয় সরকারি চাকরি (SSC/RRB/UPSC)</a></li>
+        <li><a href="{{ site.baseurl }}/#tenth-pass" class="hover:text-emerald-400 transition"><i class="fas fa-chevron-right text-xs mr-1"></i> মাধ্যমিক পাস চাকরি (১০ম শ্রেণি)</a></li>
+      </ul>
+    </div>
+
+    <!-- Disclaimer & Notice -->
+    <div>
+      <h3 class="text-white font-bold text-base mb-3 border-b border-slate-700 pb-1">সতর্কীকরণ ও দাবিত্যাগ (Disclaimer)</h3>
+      <p class="text-xs text-slate-400 leading-relaxed">
+        এই ওয়েবসাইটের উদ্দেশ্য শুধুমাত্র চাকরিপ্রার্থীদের সাহায্যার্থে তথ্যের প্রচার করা। আমরা কোনো সরকারি সংস্থা নই এবং কোনো চাকরির সরাসরি নিয়োগ করি না। যেকোনো চাকরিতে আবেদনের পূর্বে অবশ্যই সংশ্লিষ্ট দপ্তরের অফিশিয়াল নোটিফিকেশন খুঁটিয়ে পড়ে নেবেন।
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 pt-6 border-t border-slate-800 text-xs text-center text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <p>© {{ 'now' | date: "%Y" }} চাকরির খবর (KarmaSangbad). সর্বস্বত্ব সংরক্ষিত।</p>
+    <div class="flex gap-4">
+      <a href="{{ site.baseurl }}/privacy-policy.html" class="hover:text-slate-400">গোপনীয়তা নীতি (Privacy Policy)</a>
+      <a href="{{ site.baseurl }}/disclaimer.html" class="hover:text-slate-400">দাবিত্যাগ (Disclaimer)</a>
+      <a href="{{ site.baseurl }}/contact.html" class="hover:text-slate-400">যোগাযোগ (Contact)</a>
+    </div>
+  </div>
+</footer>

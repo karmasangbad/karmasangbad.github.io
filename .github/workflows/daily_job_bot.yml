@@ -1,0 +1,44 @@
+name: Daily Gov Job News Bot
+
+on:
+  schedule:
+    # Runs everyday at 6:00 AM IST (00:30 UTC)
+    - cron: '30 0 * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch Notices, Generate Bengali Posts with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/runner.py
+
+      - name: Commit and Push New Posts
+        run: |
+          git config --global user.name "KarmaSangbad Bot"
+          git config --global user.email "bot@users.noreply.github.com"
+          git add _posts/ scripts/history.json
+          git diff --staged --quiet || (git commit -m "Auto: Added new Bengali job notifications [skip ci]" && git push)

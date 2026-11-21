@@ -1,0 +1,8 @@
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+.env
+__pycache__/
+*.pyc
+.vscode/

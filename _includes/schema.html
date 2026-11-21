@@ -1,0 +1,30 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "{{ page.title | escape }}",
+  "description": "{{ page.content | strip_html | truncatewords: 60 | escape }}",
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "{{ page.department | default: 'Government Recruitment' | escape }}",
+    "value": "{{ page.id | escape }}"
+  },
+  "datePosted": "{{ page.date | date: '%Y-%m-%d' }}",
+  "validThrough": "{% if page.valid_through %}{{ page.valid_through }}{% else %}{{ page.date | date: '%Y-%m-%d' }}{% endif %}",
+  "employmentType": "FULL_TIME",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "{{ page.department | default: 'Government of West Bengal / India' | escape }}",
+    "sameAs": "{{ page.official_link | default: site.url }}"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "{{ page.location | default: 'West Bengal' | escape }}",
+      "addressRegion": "{{ page.location | default: 'West Bengal' | escape }}",
+      "addressCountry": "IN"
+    }
+  }
+}
+</script>
