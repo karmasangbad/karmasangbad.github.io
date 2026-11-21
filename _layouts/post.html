@@ -65,20 +65,37 @@ layout: default
 
     <!-- Quick Action / Official Links Buttons -->
     <div class="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t border-slate-100">
-      {% if page.apply_link %}
-      <a href="{{ page.apply_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
-        <i class="fas fa-edit"></i> অনলাইনে আবেদন করুন
-      </a>
+      <!-- 1. Apply Link / Action Button -->
+      {% if page.apply_link and page.apply_link != "" and page.apply_link != page.official_link %}
+        <a href="{{ page.apply_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
+          <i class="fas fa-edit"></i> {{ page.apply_btn_text | default: "অনলাইনে আবেদন করুন" }}
+        </a>
+      {% elsif page.apply_status %}
+        <span class="inline-flex items-center gap-2 bg-amber-50 border border-amber-300 text-amber-900 font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg">
+          <i class="fas fa-hourglass-half text-amber-600"></i> {{ page.apply_status }}
+        </span>
+      {% else %}
+        <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
+          <i class="fas fa-edit"></i> {{ page.apply_btn_text | default: "অনলাইন পোর্টাল" }}
+        </a>
       {% endif %}
-      {% if page.pdf_link %}
-      <a href="{{ page.pdf_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
-        <i class="fas fa-file-pdf"></i> অফিশিয়াল বিজ্ঞপ্তি (PDF)
-      </a>
+
+      <!-- 2. PDF / Notification Direct Link -->
+      {% if page.pdf_link and page.pdf_link != "" and page.pdf_link != page.official_link %}
+        <a href="{{ page.pdf_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
+          <i class="fas fa-file-pdf"></i> অফিশিয়াল বিজ্ঞপ্তি (PDF / নোটিশ)
+        </a>
+      {% else %}
+        <a href="{{ page.notice_board | default: page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg transition">
+          <i class="fas fa-bullhorn text-rose-600"></i> অফিশিয়াল নোটিশ বোর্ড
+        </a>
       {% endif %}
+
+      <!-- 3. Official Main Website -->
       {% if page.official_link %}
-      <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-800 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
-        <i class="fas fa-globe"></i> অফিশিয়াল ওয়েবসাইট
-      </a>
+        <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
+          <i class="fas fa-globe"></i> অফিশিয়াল ওয়েবসাইট
+        </a>
       {% endif %}
     </div>
   </header>
@@ -109,23 +126,30 @@ layout: default
     <h3 class="font-bold text-base text-slate-900 mb-3 flex items-center gap-2">
       <i class="fas fa-link text-emerald-600"></i> প্রয়োজনীয় অফিশিয়াল লিঙ্কসমূহ
     </h3>
-    <ul class="space-y-2 text-xs md:text-sm">
+    <ul class="space-y-2.5 text-xs md:text-sm">
+      {% if page.pdf_link and page.pdf_link != "" %}
+      <li class="flex items-center gap-2">
+        <span class="font-bold text-red-600"><i class="fas fa-file-pdf"></i> অফিশিয়াল বিজ্ঞপ্তি / PDF লিঙ্ক:</span>
+        <a href="{{ page.pdf_link }}" target="_blank" rel="noopener nofollow" class="text-red-700 hover:underline break-all font-semibold">{{ page.pdf_link }}</a>
+      </li>
+      {% endif %}
+      
+      {% if page.apply_link and page.apply_link != "" and page.apply_link != page.official_link %}
+      <li class="flex items-center gap-2">
+        <span class="font-bold text-emerald-700"><i class="fas fa-edit"></i> সরাসরি অনলাইনে আবেদন লিঙ্ক:</span>
+        <a href="{{ page.apply_link }}" target="_blank" rel="noopener nofollow" class="text-emerald-700 hover:underline break-all font-semibold">{{ page.apply_link }}</a>
+      </li>
+      {% elsif page.apply_status %}
+      <li class="flex items-center gap-2">
+        <span class="font-bold text-amber-700"><i class="fas fa-clock"></i> আবেদন স্থিতি:</span>
+        <span class="text-amber-800 font-semibold">{{ page.apply_status }}</span>
+      </li>
+      {% endif %}
+
       {% if page.official_link %}
       <li class="flex items-center gap-2">
-        <span class="font-semibold text-slate-700">অফিসিয়াল ওয়েবসাইট:</span>
+        <span class="font-bold text-slate-700"><i class="fas fa-globe"></i> সংশ্লিষ্ট দপ্তরের মূল ওয়েবসাইট:</span>
         <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="text-blue-600 hover:underline break-all">{{ page.official_link }}</a>
-      </li>
-      {% endif %}
-      {% if page.pdf_link %}
-      <li class="flex items-center gap-2">
-        <span class="font-semibold text-slate-700">অফিসিয়াল নোটিফিকেশন PDF:</span>
-        <a href="{{ page.pdf_link }}" target="_blank" rel="noopener nofollow" class="text-red-600 hover:underline break-all">{{ page.pdf_link }}</a>
-      </li>
-      {% endif %}
-      {% if page.apply_link %}
-      <li class="flex items-center gap-2">
-        <span class="font-semibold text-slate-700">অনলাইনে আবেদন লিঙ্ক:</span>
-        <a href="{{ page.apply_link }}" target="_blank" rel="noopener nofollow" class="text-emerald-600 hover:underline break-all">{{ page.apply_link }}</a>
       </li>
       {% endif %}
     </ul>

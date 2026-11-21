@@ -12,8 +12,10 @@ age_limit: "২৩ থেকে ৩৫ বছর (সংরক্ষিত শ�
 last_date: "২৫ ডিসেম্বর ২০২৬"
 apply_mode: "অনলাইন (Online)"
 official_link: "https://psc.wb.gov.in"
-pdf_link: "https://psc.wb.gov.in/Download?param1=An_Indicative_advt_judicial_2025.pdf"
+pdf_link: "https://psc.wb.gov.in/Download?param1=An_20251122123405_Indicative_advt_judicial_2025.pdf&param2=advertisement"
 apply_link: "https://psc.wb.gov.in"
+apply_status: "অনলাইন আবেদন লিঙ্ক শীঘ্রই সক্রিয় হবে"
+apply_btn_text: "WBPSC আবেদন পোর্টাল"
 summary: "পশ্চিমবঙ্গ পাবলিক সার্ভিস কমিশনের মাধ্যমে পশ্চিমবঙ্গ জুডিশিয়াল সার্ভিসে সিভিল জজ পদে নিয়োগের অফিশিয়াল বিজ্ঞপ্তি প্রকাশিত হয়েছে।"
 ---
 

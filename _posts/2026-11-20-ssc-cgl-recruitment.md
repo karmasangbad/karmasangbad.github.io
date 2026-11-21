@@ -12,8 +12,9 @@ age_limit: "১৮ থেকে ৩২ বছর (পদ অনুযায়ী �
 last_date: "১০ জানুয়ারি ২০২৭"
 apply_mode: "অনলাইন (Online)"
 official_link: "https://ssc.gov.in"
-pdf_link: "https://ssc.gov.in"
-apply_link: "https://ssc.gov.in"
+pdf_link: "https://ssc.gov.in/api-front/download-file?filename=Notice_CGLE_2024.pdf"
+apply_link: "https://ssc.gov.in/login"
+apply_btn_text: "এসএসসি ওটিআর ও আবেদন পোর্টাল"
 summary: "স্টাফ সিলেকশন কমিশনের মাধ্যমে ভারত সরকারের বিভিন্ন কেন্দ্রীয় মন্ত্রক ও দপ্তরে গ্রুপ 'বি' ও 'সি' পদে নিয়োগের বিজ্ঞপ্তি।"
 ---
 

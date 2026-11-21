@@ -14,6 +14,7 @@ apply_mode: "অনলাইন (Online)"
 official_link: "https://psc.wb.gov.in"
 pdf_link: "https://psc.wb.gov.in/Download?param1=An_20251124133713_Notice_No_472.pdf¶m2=advertisement"
 apply_link: "https://psc.wb.gov.in"
+apply_btn_text: "WBPSC অফিশিয়াল পোর্টাল"
 summary: "West Bengal Public Service Commission (WBPSC): IMPORTANT NOTICE FOR  THE POST OF FISHERY FIELD ASSISTANT (FFA) IN THE DEPARTMEN সংক্রান্ত নতুন অফিশিয়াল নোটিফিকেশন ও নির্দেশিকা।"
 ---
 

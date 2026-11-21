@@ -12,8 +12,10 @@ age_limit: "১৮ থেকে ৩০ বছর (সংরক্ষিতদে
 last_date: "২০ জানুয়ারি ২০২৭"
 apply_mode: "অনলাইন (Online)"
 official_link: "https://prb.wb.gov.in"
-pdf_link: "https://prb.wb.gov.in"
-apply_link: "https://prb.wb.gov.in"
+pdf_link: "https://prb.wb.gov.in/recruitments"
+apply_link: "https://prb.wb.gov.in/recruitments"
+apply_status: "অনলাইন আবেদন শীঘ্রই শুরু হবে (বিজ্ঞপ্তি দেখুন)"
+apply_btn_text: "নিয়োগ সংক্রান্ত অফিশিয়াল পোর্টাল"
 summary: "পশ্চিমবঙ্গ পুলিশ রিক্রুটমেন্ট বোর্ডের পক্ষ থেকে মাধ্যমিক পাসে কনস্টেবল এবং লেডি কনস্টেবল পদে বিপুল কর্মী নিয়োগের প্রক্রিয়া।"
 ---
 

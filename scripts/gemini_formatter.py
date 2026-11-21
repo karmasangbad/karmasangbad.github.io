@@ -49,8 +49,31 @@ def format_job_to_bengali_markdown(notice):
     category = notice.get("category", "পশ্চিমবঙ্গ সরকার")
     official_link = notice.get("official_link", "")
     pdf_link = notice.get("pdf_link", "")
-    today_str = datetime.now().strftime("%Y-%m-%d")
+    direct_apply_link = notice.get("apply_link", "")
     datetime_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S +0530")
+
+    # Smart button action detection based on title
+    title_lower = title.lower()
+    if any(k in title_lower for k in ["admit", "e-admit"]):
+        default_btn_text = "এডমিট কার্ড ডাউনলোড লিঙ্ক"
+        default_apply_link = pdf_link or official_link
+        default_apply_status = ""
+    elif any(k in title_lower for k in ["call letter", "personality test"]):
+        default_btn_text = "কল লেটার ডাউনলোড লিঙ্ক"
+        default_apply_link = pdf_link or official_link
+        default_apply_status = ""
+    elif any(k in title_lower for k in ["result", "merit"]):
+        default_btn_text = "ফলাফল / মেরিট লিস্ট দেখুন"
+        default_apply_link = pdf_link or official_link
+        default_apply_status = ""
+    elif any(k in title_lower for k in ["indicative", "advance"]):
+        default_btn_text = "অনলাইন আবেদন পোর্টাল"
+        default_apply_link = direct_apply_link or official_link
+        default_apply_status = "অনলাইন আবেদন প্রক্রিয়া শীঘ্রই শুরু হবে"
+    else:
+        default_btn_text = "অনলাইনে আবেদন করুন"
+        default_apply_link = direct_apply_link or pdf_link or official_link
+        default_apply_status = ""
 
     # If GEMINI_API_KEY is available, let AI write a rich Bengali article
     if api_key:
@@ -74,6 +97,8 @@ Generate a JSON object strictly in this JSON format:
   "age_limit": "Age limit in Bengali (e.g. ১৮ থেকে ৪০ বছর)",
   "last_date": "Last date to apply in Bengali or 'শীঘ্রই সমাপ্ত'",
   "apply_mode": "অনলাইন (Online) / অফলাইন",
+  "apply_btn_text": "অনলাইনে আবেদন করুন / এডমিট কার্ড ডাউনলোড / নোটিফিকেশন পোর্টাল",
+  "apply_status": "Status if upcoming e.g. 'আবেদন শীঘ্রই শুরু হবে' or empty string if active",
   "summary": "1-2 sentence Bengali summary for social media preview",
   "body_content": "Detailed Bengali body content in clean Markdown including:
     - নিয়োগ সংক্রান্ত সারসংক্ষেপ
@@ -88,7 +113,6 @@ Respond ONLY with the raw JSON object, without backticks or markdown fences.
         response_text = call_gemini_api(prompt, api_key)
         if response_text:
             try:
-                # Clean possible codeblock wrappers
                 cleaned_json = re.sub(r'^```json\s*', '', response_text.strip(), flags=re.MULTILINE)
                 cleaned_json = re.sub(r'```$', '', cleaned_json.strip())
                 parsed = json.loads(cleaned_json)
@@ -101,8 +125,12 @@ Respond ONLY with the raw JSON object, without backticks or markdown fences.
                 age_limit = parsed.get("age_limit", "নিয়মানুযায়ী ছাড় প্রযোজ্য")
                 last_date = parsed.get("last_date", "শীঘ্রই সমাপ্ত")
                 apply_mode = parsed.get("apply_mode", "অনলাইন (Online)")
+                apply_btn_text = parsed.get("apply_btn_text", default_btn_text)
+                apply_status = parsed.get("apply_status", default_apply_status)
                 summary = parsed.get("summary", bengali_title)
                 body = parsed.get("body_content", "")
+
+                status_yaml = f'apply_status: "{apply_status}"' if apply_status else ""
 
                 markdown = f"""---
 layout: post
@@ -117,9 +145,11 @@ qualification: "{qualification}"
 age_limit: "{age_limit}"
 last_date: "{last_date}"
 apply_mode: "{apply_mode}"
+apply_btn_text: "{apply_btn_text}"
+{status_yaml}
 official_link: "{official_link}"
 pdf_link: "{pdf_link}"
-apply_link: "{official_link}"
+apply_link: "{default_apply_link}"
 summary: "{summary}"
 ---
 
@@ -132,6 +162,8 @@ summary: "{summary}"
     # Fallback template if no API key or AI call failed
     slug = clean_slug(title)
     bengali_title = f"{department}: {title[:80]}"
+    status_yaml = f'apply_status: "{default_apply_status}"' if default_apply_status else ""
+
     markdown = f"""---
 layout: post
 title: "{bengali_title}"
@@ -145,9 +177,11 @@ qualification: "অফিশিয়াল নোটিফিকেশন দ�
 age_limit: "সরকারি নিয়ম অনুযায়ী প্রযোজ্য"
 last_date: "অফিশিয়াল বিজ্ঞপ্তিতে দেখুন"
 apply_mode: "অনলাইন (Online)"
+apply_btn_text: "{default_btn_text}"
+{status_yaml}
 official_link: "{official_link}"
 pdf_link: "{pdf_link}"
-apply_link: "{official_link}"
+apply_link: "{default_apply_link}"
 summary: "{bengali_title} সংক্রান্ত নতুন অফিশিয়াল নোটিফিকেশন ও নির্দেশিকা।"
 ---
 

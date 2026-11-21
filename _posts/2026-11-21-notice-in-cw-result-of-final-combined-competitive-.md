@@ -13,7 +13,8 @@ last_date: "অফিশিয়াল বিজ্ঞপ্তিতে দে
 apply_mode: "অনলাইন (Online)"
 official_link: "https://prb.wb.gov.in"
 pdf_link: "https://prb.wb.gov.in/recruitments/9b380303ea68fda3"
-apply_link: "https://prb.wb.gov.in"
+apply_link: "https://prb.wb.gov.in/recruitments/9b380303ea68fda3"
+apply_btn_text: "ফলাফল ও মেরিট লিস্ট পোর্টাল"
 summary: "West Bengal Police Recruitment Board (WBPRB): Notice in c/w Result of final Combined Competitive Examination and commencing da সংক্রান্ত নতুন অফিশিয়াল নোটিফিকেশন ও নির্দেশিকা।"
 ---
 
