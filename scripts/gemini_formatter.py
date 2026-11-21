@@ -52,9 +52,16 @@ def format_job_to_bengali_markdown(notice):
     direct_apply_link = notice.get("apply_link", "")
     datetime_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S +0530")
 
-    # Smart button action detection based on title
+    # Smart button action detection based on title (or respect scraper's custom btn_text)
+    custom_btn = notice.get("apply_btn_text")
+    custom_status = notice.get("apply_status", "")
     title_lower = title.lower()
-    if any(k in title_lower for k in ["admit", "e-admit"]):
+
+    if custom_btn:
+        default_btn_text = custom_btn
+        default_apply_link = direct_apply_link or pdf_link or official_link
+        default_apply_status = custom_status
+    elif any(k in title_lower for k in ["admit", "e-admit"]):
         default_btn_text = "এডমিট কার্ড ডাউনলোড লিঙ্ক"
         default_apply_link = pdf_link or official_link
         default_apply_status = ""

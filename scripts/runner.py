@@ -12,6 +12,7 @@ from scrapers.wbpsc_scraper import get_wbpsc_notices
 from scrapers.wbprb_scraper import get_wbprb_notices
 from scrapers.ssc_scraper import get_ssc_notices
 from scrapers.employment_news_scraper import get_employment_news_notices
+from scrapers.karmasangsthan_scraper import get_all_karmasangsthan_notices
 from gemini_formatter import format_job_to_bengali_markdown
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -72,6 +73,14 @@ def run_pipeline():
         all_notices.extend(emp)
     except Exception as e:
         print(f"[Runner] Employment News error: {e}")
+
+    # 5. Karmasangsthan Online (Weekly Paper & News)
+    try:
+        ks_papers = get_all_karmasangsthan_notices()
+        print(f"[Runner] Fetched {len(ks_papers)} editions from karmasangsthan.online.")
+        all_notices.extend(ks_papers)
+    except Exception as e:
+        print(f"[Runner] Karmasangsthan error: {e}")
 
     new_posts_count = 0
     today_str = datetime.now().strftime("%Y-%m-%d")
