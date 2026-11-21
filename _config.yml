@@ -1,7 +1,7 @@
 # Site Settings
 title: "চাকরির খবর (KarmaSangbad) - পশ্চিমবঙ্গ ও কেন্দ্রীয় সরকারি চাকরি"
 description: "প্রতিদিনের পশ্চিমবঙ্গ ও কেন্দ্রীয় সরকারি চাকরির খবর, অফিশিয়াল নোটিফিকেশন এবং বাংলায় অনলাইনে আবেদনের সম্পূর্ণ নির্দেশিকা।"
-url: "https://yourusername.github.io" # Replace with your GitHub Pages URL
+url: "https://karmasangbad.github.io" # Your live GitHub Pages URL
 baseurl: "" # Leave empty if using custom domain or username.github.io, or set to /repo-name
 
 # Author & Contact
