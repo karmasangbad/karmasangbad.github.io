@@ -12,7 +12,7 @@ age_limit: "সরকারি নিয়ম অনুযায়ী প্�
 last_date: "অফিশিয়াল বিজ্ঞপ্তিতে দেখুন"
 apply_mode: "অনলাইন (Online)"
 official_link: "https://psc.wb.gov.in"
-pdf_link: "https://psc.wb.gov.in/Download?param1=An_20251122123405_Indicative_advt_judicial_2025.pdf¶m2=advertisement"
+pdf_link: "https://psc.wb.gov.in/Download?param1=An_20251122123405_Indicative_advt_judicial_2025.pdf&param2=advertisement"
 apply_link: "https://psc.wb.gov.in"
 apply_btn_text: "WBPSC অফিশিয়াল পোর্টাল"
 summary: "West Bengal Public Service Commission (WBPSC): INDICATIVE ADVERTISEMENT FOR RECRUITMENT TO THE POST OF CIVIL JUDGE (JR. DIVN.)  সংক্রান্ত নতুন অফিশিয়াল নোটিফিকেশন ও নির্দেশিকা।"

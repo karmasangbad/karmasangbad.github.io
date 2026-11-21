@@ -12,7 +12,7 @@ age_limit: "সরকারি নিয়ম অনুযায়ী প্�
 last_date: "অফিশিয়াল বিজ্ঞপ্তিতে দেখুন"
 apply_mode: "অনলাইন (Online)"
 official_link: "https://psc.wb.gov.in"
-pdf_link: "https://psc.wb.gov.in/Download?param1=An_20251122123839_Important_announcement_Admit_card_WBJS_2023.pdf¶m2=advertisement"
+pdf_link: "https://psc.wb.gov.in/Download?param1=An_20251122123839_Important_announcement_Admit_card_WBJS_2023.pdf&param2=advertisement"
 apply_link: "https://psc.wb.gov.in"
 apply_btn_text: "WBPSC অফিশিয়াল পোর্টাল"
 summary: "West Bengal Public Service Commission (WBPSC): IMPORTANT ANNOUNCEMENT IN CONNECTION WITH WEST BENGAL JUDICIAL SERVICE (PRELIMIN সংক্রান্ত নতুন অফিশিয়াল নোটিফিকেশন ও নির্দেশিকা।"
