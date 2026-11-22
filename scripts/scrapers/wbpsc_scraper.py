@@ -45,7 +45,7 @@ def get_wbpsc_notices(limit=5):
 
             if len(title) > 20 and any(k in title.lower() for k in keywords):
                 # Clean URL and query parameters
-                href_clean = href.replace("&amp;", "&")
+                href_clean = href.replace("&amp;", "&").replace("¶m2", "&param2")
                 if href_clean.startswith("Download?"):
                     full_link = f"https://psc.wb.gov.in/{href_clean}"
                 elif href_clean.startswith("http"):

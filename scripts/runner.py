@@ -44,7 +44,7 @@ def run_pipeline():
     
     # 1. WBPSC
     try:
-        wbpsc = get_wbpsc_notices(limit=3)
+        wbpsc = get_wbpsc_notices(limit=10)
         print(f"[Runner] Fetched {len(wbpsc)} notices from WBPSC.")
         all_notices.extend(wbpsc)
     except Exception as e:
@@ -52,7 +52,7 @@ def run_pipeline():
 
     # 2. WBPRB
     try:
-        wbprb = get_wbprb_notices(limit=3)
+        wbprb = get_wbprb_notices(limit=10)
         print(f"[Runner] Fetched {len(wbprb)} notices from WBPRB.")
         all_notices.extend(wbprb)
     except Exception as e:
