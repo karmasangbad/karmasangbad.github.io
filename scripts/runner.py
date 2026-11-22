@@ -14,6 +14,7 @@ from scrapers.ssc_scraper import get_ssc_notices
 from scrapers.employment_news_scraper import get_employment_news_notices
 from scrapers.karmasangsthan_scraper import get_all_karmasangsthan_notices
 from gemini_formatter import format_job_to_bengali_markdown
+from fb_publisher import auto_publish_job_to_fb
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BASE_DIR, "_posts")
@@ -106,6 +107,14 @@ def run_pipeline():
             f.write(markdown_content)
 
         print(f"[Runner] Saved: _posts/{os.path.basename(filepath)}")
+
+        # Construct article link & auto-publish to Facebook
+        article_url = f"https://karmasangbad.github.io/"
+        try:
+            auto_publish_job_to_fb(notice, article_url, slug)
+        except Exception as fb_err:
+            print(f"[Runner] Facebook post error: {fb_err}")
+
         seen_ids.add(nid)
         new_posts_count += 1
 

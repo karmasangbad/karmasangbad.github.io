@@ -30,15 +30,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Fetch Notices, Generate Bengali Posts with Gemini
+      - name: Fetch Notices, Generate Bengali Posts & Auto-Post to Facebook
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
         run: |
           python scripts/runner.py
 
-      - name: Commit and Push New Posts
+      - name: Commit and Push New Posts & Banners
         run: |
           git config --global user.name "KarmaSangbad Bot"
           git config --global user.email "bot@users.noreply.github.com"
-          git add _posts/ scripts/history.json
-          git diff --staged --quiet || (git commit -m "Auto: Added new Bengali job notifications [skip ci]" && git push)
+          git add _posts/ scripts/history.json assets/banners/
+          git diff --staged --quiet || (git commit -m "Auto: Added new Bengali job notifications and Facebook banners [skip ci]" && git push)
