@@ -112,6 +112,11 @@ layout: default
           প্রতিটি সরকারি চাকরির বিজ্ঞপ্তি প্রকাশের সাথে সাথে আপনার মোবাইলে সরাসরি নোটিফিকেশন পেতে যুক্ত হন:
         </p>
         <div class="space-y-2">
+          {% if site.author.facebook %}
+          <a href="{{ site.author.facebook }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition shadow">
+            <i class="fab fa-facebook-f"></i> ফেসবুক পেজে ফলো করুন
+          </a>
+          {% endif %}
           {% if site.author.telegram %}
           <a href="{{ site.author.telegram }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold rounded-lg transition shadow">
             <i class="fab fa-telegram-plane"></i> টেলিগ্রাম চ্যানেলে জয়েন করুন

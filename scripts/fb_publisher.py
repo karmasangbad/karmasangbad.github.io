@@ -251,7 +251,7 @@ def post_to_facebook_page(image_path, caption):
     """
     Uploads a photo with description and article link to Facebook Page via Graph API.
     """
-    page_id = os.environ.get("FB_PAGE_ID", "").strip()
+    page_id = os.environ.get("FB_PAGE_ID", "61596771963967").strip()
     access_token = os.environ.get("FB_PAGE_ACCESS_TOKEN", "").strip()
 
     if not page_id or not access_token:

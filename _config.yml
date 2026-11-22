@@ -10,6 +10,7 @@ author:
   email: "contact@example.com"
   telegram: "https://t.me/your_telegram_channel"
   whatsapp: "https://whatsapp.com/channel/your_channel"
+  facebook: "https://www.facebook.com/profile.php?id=61596771963967"
 
 # Build Settings
 markdown: kramdown
