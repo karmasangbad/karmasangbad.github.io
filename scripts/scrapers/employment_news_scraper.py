@@ -1,6 +1,7 @@
 import ssl
 import urllib3
 import requests
+import hashlib
 from requests.adapters import HTTPAdapter
 from bs4 import BeautifulSoup
 
@@ -29,19 +30,16 @@ def get_employment_news_notices(limit=5):
 
     notices = []
     try:
-        response = session.get(url, headers=headers, timeout=15)
+        response = session.get(url, headers=headers, timeout=8)
         if response.status_code != 200:
-            print(f"[EmploymentNews] Warning: Received status {response.status_code}")
             return notices
 
         soup = BeautifulSoup(response.text, "html.parser")
-        
-        # Employment news has vacancy links and marquees
         keywords = ["recruitment", "vacancy", "post", "officer", "assistant", "staff", "commission", "apprentice"]
 
         for a in soup.find_all("a", href=True):
             title = a.get_text(strip=True)
-            href = a["href"]
+            href = a["href"].strip()
 
             if len(title) > 25 and any(k in title.lower() for k in keywords):
                 if href.startswith("/"):
@@ -51,15 +49,17 @@ def get_employment_news_notices(limit=5):
                 else:
                     full_link = f"https://employmentnews.gov.in/{href}"
 
-                notice_id = f"empnews_{abs(hash(title)) % 1000000}"
+                notice_id = f"empnews_{hashlib.md5(title.encode('utf-8')).hexdigest()[:12]}"
 
                 notices.append({
                     "id": notice_id,
                     "title": title,
                     "official_link": "https://employmentnews.gov.in",
+                    "apply_link": "https://employmentnews.gov.in",
                     "pdf_link": full_link,
-                    "department": "Government of India / Central Departments",
-                    "category": "কেন্দ্রীয় সরকার",
+                    "department": "Government of India / Central Ministries",
+                    "category": "Central Govt Jobs",
+                    "state": "All India",
                     "source": "Employment News"
                 })
 

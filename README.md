@@ -1,86 +1,75 @@
-# KarmaSangbad (চাকরির খবর) - Automated Bengali Govt Job Portal
+# KarmaSangbad - All India Govt Job News & Sarkari Recruitment Portal
 
-একটি সম্পূর্ণ স্বয়ংক্রিয় (Fully Automated) সরকারি চাকরির খবর ওয়েবসাইট, যা প্রতিদিন পশ্চিমবঙ্গ (WBPSC, WBPRB) এবং কেন্দ্রীয় সরকার (SSC, Employment News, রেলওয়ে)-এর অফিশিয়াল নোটিফিকেশন সংগ্রহ করে, বাংলায় সহজ ভাষায় আবেদন নির্দেশিকাসহ প্রকাশ করে।
-
----
-
-## 🌟 প্রধান বৈশিষ্ট্যসমূহ (Key Features):
-1. **১০০% বিনামূল্যে হোস্টিং ও অটোমেশন (GitHub Pages & Actions):** কোনো পেইড হোস্টিং বা সার্ভার ফি দিতে হবে না।
-2. **প্রতিদিনের অটোমেটিক আপডেট:** প্রতিদিন সকাল ৬:০০ টায় GitHub Actions স্বয়ংক্রিয়ভাবে নোটিফিকেশন চেক ও প্রকাশ করে।
-3. **AI দ্বারা বাংলায় রূপান্তর ও নির্দেশিকা:** Google Gemini AI নোটিফিকেশন বিশ্লেষণ করে বাংলায় সহজবোধ্য আবেদন পদ্ধতি (How to Apply) প্রস্তুত করে।
-4. **অফিসিয়াল লিঙ্ক ও PDF নোটিফিকেশন:** সরাসরি আবেদন ও অফিশিয়াল নোটিফিকেশন ডাউনলোড লিঙ্ক যুক্ত থাকে।
-5. **SEO ও মোবাইল ফ্রেন্ডলি:** 
-   - পরিষ্কার বাংলা ফন্ট (`Hind Siliguri`).
-   - Google Job Search এর জন্য Schema.org (`JobPosting`) স্ট্রাকচার্ড ডেটা।
-   - লাইভ ইনস্ট্যান্ট সার্চ এবং ক্যাটাগরি ফিল্টার (পশ্চিমবঙ্গ, কেন্দ্রীয়, পুলিশ)।
-   - হোয়াটসঅ্যাপ ও টেলিগ্রাম শেয়ার বাটন।
+An automated, modern Government Job Recruitment portal covering **Central Government & All Indian States** (UPSC, SSC, Indian Railways / RRB, Banking / IBPS & SBI, Defence & Police, State PSCs, and Employment News). Built with **Jekyll**, hosted 100% free on **GitHub Pages**, and powered by daily **GitHub Actions** automation with **Facebook Page Auto-Posting**.
 
 ---
 
-## 🚀 সেটআপ ও চালু করার নির্দেশিকা (3-Step Quick Setup):
+## 🌟 Key Features
 
-### ধাপ ১: GitHub-এ রিপোজিটরি তৈরি ও পুশ করুন
-আপনার কম্পিউটারের টার্মিনাল বা PowerShell-এ এই ফোল্ডারে গিয়ে কমান্ডগুলো চালান:
+1. **Pan-India Coverage:**
+   - **Central Government:** UPSC (Civil Services, NDA, CDS), SSC (CGL, CHSL, MTS, GD Constable), Employment News India.
+   - **Indian Railways (RRB):** Assistant Loco Pilot (ALP), Technician, NTPC, Group D, Junior Engineer.
+   - **Banking & Finance:** IBPS (PO, Clerk, SO, RRB), State Bank of India (SBI), RBI.
+   - **Defence & Police:** Indian Army (Agniveer), Indian Navy, Indian Air Force, Central Armed Police Forces (CAPF), State Police Boards.
+   - **State Government Jobs:** West Bengal, Uttar Pradesh, Bihar, Delhi/NCR, Maharashtra, Rajasthan, South States, etc.
+   - **Jobs by Qualification:** 10th Pass (Matriculation), 12th Pass (Intermediate), ITI / Diploma, Graduate Degree, Post Graduate.
+2. **100% Free Cloud Infrastructure:**
+   - Zero hosting or server cost running on **GitHub Pages**.
+   - Automated daily scraping and publishing at 6:00 AM IST via **GitHub Actions**.
+3. **Facebook Auto-Publisher with Dynamic Banners:**
+   - Generates high-contrast 1200x630 recruitment banners using headless Chrome/Edge.
+   - Publishes image banners with captions and direct article links to Facebook Page via Meta Graph API.
+4. **Google Jobs SEO & Mobile Responsive:**
+   - Schema.org `JobPosting` structured JSON-LD for rich snippets on Google Search.
+   - Fast instant search and sector/state filters using Tailwind CSS.
+   - Official direct PDF download links and active online apply buttons.
 
-```bash
-git init
-git add .
-git commit -m "Initial commit for KarmaSangbad Bengali Job Portal"
-git branch -M main
-git remote add origin https://github.com/<আপনার-ইউজারনেম>/<রিপোজিটরি-নাম>.git
-git push -u origin main
+---
+
+## 📁 Repository Structure
+
+```
+├── .github/workflows/
+│   ├── daily_job_bot.yml      # Cron automation (Daily 6:00 AM IST)
+│   └── deploy.yml             # GitHub Pages automated deployment
+├── _includes/
+│   ├── header.html            # Top banner, Pan-India nav, social links
+│   ├── footer.html            # Disclaimer, categories, copyright
+│   ├── head.html              # Typography (Inter, Poppins, Hind Siliguri)
+│   └── schema.html            # Schema.org JobPosting JSON-LD
+├── _layouts/
+│   ├── default.html           # Master layout
+│   ├── home.html              # Hero, live search, sector/state filters
+│   └── post.html              # Job details, official links & PDF downloads
+├── _posts/                    # Published recruitment notices
+├── assets/
+│   ├── js/search.js           # Live search and multi-state filter logic
+│   └── banners/               # Generated social media banners
+├── scripts/
+│   ├── runner.py              # Orchestrates scrapers and publisher
+│   ├── gemini_formatter.py    # Formats notices into structured Markdown
+│   ├── fb_publisher.py        # Generates banners and posts to Facebook
+│   └── scrapers/
+│       ├── upsc_scraper.py    # Union Public Service Commission
+│       ├── ssc_scraper.py     # Staff Selection Commission
+│       ├── rrb_scraper.py     # Railway Recruitment Boards
+│       ├── bank_scraper.py    # IBPS & SBI Banking
+│       ├── employment_news_scraper.py # Employment News India
+│       ├── wbpsc_scraper.py   # State PSCs
+│       ├── wbprb_scraper.py   # State Police Boards
+│       └── karmasangsthan_scraper.py # Weekly recruitment newspapers
+├── _config.yml                # Site configuration and social channels
+└── requirements.txt           # Python dependencies
 ```
 
 ---
 
-### ধাপ ২: GitHub Pages চালু করুন (Enable Pages)
-1. আপনার GitHub রিপোজিটরির **Settings** ট্যাবে যান।
-2. বাঁদিকের মেনু থেকে **Pages** সিলেক্ট করুন।
-3. **Build and deployment > Source** অপশনে **GitHub Actions** নির্বাচন করুন।
-4. ব্যস! রিপোজিটরিতে কোনো পরিবর্তন বা নতুন পোস্ট এলেই স্বয়ংক্রিয়ভাবে ওয়েবসাইট লাইভ হয়ে যাবে। আপনার ওয়েবসাইটের লিঙ্ক হবে:
-   `https://<আপনার-ইউজারনেম>.github.io/<রিপোজিটরি-নাম>/`
+## ⚙️ Secrets Configuration (GitHub Actions)
 
----
+Add the following under **Settings > Secrets and variables > Actions**:
 
-### ধাপ ৩: Gemini API Key যুক্ত করুন (Free AI Writer)
-1. [Google AI Studio](https://aistudio.google.com/) থেকে একটি সম্পূর্ণ ফ্রি API Key সংগ্রহ করুন।
-2. আপনার GitHub রিপোজিটরির **Settings > Secrets and variables > Actions** এ যান।
-3. **New repository secret** বাটনে ক্লিক করুন:
-   - **Name:** `GEMINI_API_KEY`
-   - **Secret:** আপনার কপি করা Gemini API Key টি পেস্ট করুন।
-4. **Add secret** সংরক্ষণ করুন।
-
----
-
-## ⚙️ কাস্টমাইজেশন (Customization):
-
-`_config.yml` ফাইলটি খুলে আপনার পছন্দমত তথ্য পরিবর্তন করুন:
-- **title:** আপনার ওয়েবসাইটের নাম।
-- **telegram:** আপনার টেলিগ্রাম চ্যানেলের লিংক।
-- **whatsapp:** আপনার হোয়াটসঅ্যাপ গ্রুপের লিংক।
-- **url / baseurl:** আপনার GitHub Pages বা কাস্টম ডোমেনের ঠিকানা।
-
----
-
-## 🤖 স্বয়ংক্রিয় কাজের রূপরেখা (How Automation Works):
-```
-[WBPSC / WBPRB / SSC / Employment News]
-                  │
-                  ▼
-[GitHub Actions (.github/workflows/daily_job_bot.yml)]
-                  │
-                  ├─► scripts/runner.py
-                  ├─► scrapers/* (নতুন নোটিফিকেশন চেক করে)
-                  ├─► gemini_formatter.py (বাংলায় আর্টিকেল তৈরি করে)
-                  └─► _posts/ ফোল্ডারে Markdown ফাইল তৈরি করে গিটহাবে পুশ করে
-```
-
----
-
-## 🧪 লোকাল টেস্ট (Local Testing):
-আপনার কম্পিউটারে ম্যানুয়ালি টেস্ট করতে চাইলে:
-```bash
-pip install -r requirements.txt
-python scripts/runner.py
-```
-নতুন পোস্ট তৈরি হয়ে সরাসরি `_posts/` ফোল্ডারে যুক্ত হবে।
+| Secret Name | Description |
+| :--- | :--- |
+| `GEMINI_API_KEY` | *(Optional)* Google Gemini API key for AI writing |
+| `FB_PAGE_ID` | Facebook Page ID (e.g. `1586846211175136`) |
+| `FB_PAGE_ACCESS_TOKEN` | Facebook Page Access Token with `pages_manage_posts` & `pages_read_engagement` |

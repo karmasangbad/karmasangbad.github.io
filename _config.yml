@@ -1,13 +1,13 @@
 # Site Settings
-title: "চাকরির খবর (KarmaSangbad) - পশ্চিমবঙ্গ ও কেন্দ্রীয় সরকারি চাকরি"
-description: "প্রতিদিনের পশ্চিমবঙ্গ ও কেন্দ্রীয় সরকারি চাকরির খবর, অফিশিয়াল নোটিফিকেশন এবং বাংলায় অনলাইনে আবেদনের সম্পূর্ণ নির্দেশিকা।"
+title: "KarmaSangbad - All India Govt Job News & Sarkari Recruitment"
+description: "Daily All India Government Job Updates, Sarkari Result, Central & State Recruitment Notifications, UPSC, SSC, Railways, Banking, Defence, and Direct Online Apply Links."
 url: "https://karmasangbad.github.io" # Your live GitHub Pages URL
-baseurl: "" # Leave empty if using custom domain or username.github.io, or set to /repo-name
+baseurl: "" # Leave empty if using custom domain or username.github.io
 
 # Author & Contact
 author:
   name: "KarmaSangbad Team"
-  email: "contact@example.com"
+  email: "contact@karmasangbad.com"
   telegram: "https://t.me/your_telegram_channel"
   whatsapp: "https://whatsapp.com/channel/your_channel"
   facebook: "https://www.facebook.com/profile.php?id=61596771963967"

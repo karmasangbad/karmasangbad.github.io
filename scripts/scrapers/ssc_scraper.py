@@ -1,6 +1,7 @@
 import ssl
 import urllib3
 import requests
+import hashlib
 from requests.adapters import HTTPAdapter
 from bs4 import BeautifulSoup
 
@@ -29,9 +30,8 @@ def get_ssc_notices(limit=5):
 
     notices = []
     try:
-        response = session.get(url, headers=headers, timeout=15)
+        response = session.get(url, headers=headers, timeout=8)
         if response.status_code != 200:
-            print(f"[SSC] Warning: Received status {response.status_code}")
             return notices
 
         soup = BeautifulSoup(response.text, "html.parser")
@@ -39,7 +39,7 @@ def get_ssc_notices(limit=5):
 
         for a in soup.find_all("a", href=True):
             title = a.get_text(strip=True)
-            href = a["href"]
+            href = a["href"].strip()
 
             if len(title) > 20 and any(k in title.lower() for k in keywords):
                 if href.startswith("/"):
@@ -49,15 +49,17 @@ def get_ssc_notices(limit=5):
                 else:
                     full_link = f"https://ssc.gov.in/{href}"
 
-                notice_id = f"ssc_{abs(hash(title)) % 1000000}"
+                notice_id = f"ssc_{hashlib.md5(title.encode('utf-8')).hexdigest()[:12]}"
 
                 notices.append({
                     "id": notice_id,
                     "title": title,
                     "official_link": "https://ssc.gov.in",
+                    "apply_link": "https://ssc.gov.in",
                     "pdf_link": full_link,
                     "department": "Staff Selection Commission (SSC)",
-                    "category": "কেন্দ্রীয় সরকার",
+                    "category": "Central Govt Jobs",
+                    "state": "All India",
                     "source": "SSC"
                 })
 

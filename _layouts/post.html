@@ -5,152 +5,160 @@ layout: default
 <article class="max-w-4xl mx-auto px-4 py-8">
   <!-- Breadcrumbs -->
   <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5 flex-wrap">
-    <a href="{{ site.baseurl }}/" class="hover:text-emerald-600">হোম</a>
+    <a href="{{ site.baseurl }}/" class="hover:text-emerald-600 font-medium">Home</a>
     <span>/</span>
-    <span class="text-emerald-700 font-medium">{{ page.category | default: 'সরকারি চাকরি' }}</span>
+    <span class="text-emerald-700 font-semibold">{{ page.category | default: 'Govt Jobs' }}</span>
     <span>/</span>
     <span class="text-slate-400 truncate max-w-xs">{{ page.title }}</span>
   </nav>
 
   <!-- Title & Meta Header -->
-  <header class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 mb-6">
-    <div class="flex items-center gap-2 mb-3">
-      <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">
-        {{ page.category | default: 'সরকারি চাকরি' }}
+  <header class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 mb-6">
+    <div class="flex items-center gap-2 mb-3 flex-wrap">
+      <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">
+        {{ page.category | default: 'Govt Job Notification' }}
       </span>
+      {% if page.state or page.location %}
+      <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-slate-200">
+        <i class="fas fa-map-marker-alt text-slate-400 mr-1"></i>{{ page.state | default: page.location }}
+      </span>
+      {% endif %}
       <span class="text-xs text-slate-500">
-        <i class="far fa-calendar-alt mr-1"></i> প্রকাশের তারিখ: {{ page.date | date: "%d %B, %Y" }}
+        <i class="far fa-calendar-alt mr-1"></i> Posted on: {{ page.date | date: "%d %B, %Y" }}
       </span>
     </div>
 
-    <h1 class="text-xl md:text-3xl font-bold text-slate-900 leading-tight mb-4">
+    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight mb-4 font-display">
       {{ page.title }}
     </h1>
 
     <!-- Summary Box Table -->
-    <div class="overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 mt-4">
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 mt-5">
       <table class="w-full text-xs md:text-sm text-left">
         <tbody>
           <tr class="border-b border-slate-200">
-            <th class="py-2.5 px-4 font-bold text-slate-700 bg-slate-100 w-1/3">নিয়োগকারী দপ্তর/সংস্থা</th>
-            <td class="py-2.5 px-4 font-semibold text-slate-900">{{ page.department | default: 'সরকারি দপ্তর' }}</td>
+            <th class="py-3 px-4 font-bold text-slate-700 bg-slate-100/70 w-1/3">Recruiting Organization</th>
+            <td class="py-3 px-4 font-semibold text-slate-900">{{ page.department | default: 'Government Department' }}</td>
           </tr>
           <tr class="border-b border-slate-200">
-            <th class="py-2.5 px-4 font-bold text-slate-700 bg-slate-100">পদের নাম</th>
-            <td class="py-2.5 px-4 font-semibold text-slate-900">{{ page.post_name | default: page.title }}</td>
+            <th class="py-3 px-4 font-bold text-slate-700 bg-slate-100/70">Post Name</th>
+            <td class="py-3 px-4 font-semibold text-slate-900">{{ page.post_name | default: page.title }}</td>
           </tr>
           <tr class="border-b border-slate-200">
-            <th class="py-2.5 px-4 font-bold text-slate-700 bg-slate-100">মোট শূন্যপদ</th>
-            <td class="py-2.5 px-4 font-bold text-emerald-700">{{ page.vacancies | default: 'বিজ্ঞপ্তিতে দেখুন' }}</td>
+            <th class="py-3 px-4 font-bold text-slate-700 bg-slate-100/70">Total Vacancies</th>
+            <td class="py-3 px-4 font-bold text-emerald-700">{{ page.vacancies | default: 'Refer Official Notice' }}</td>
           </tr>
           <tr class="border-b border-slate-200">
-            <th class="py-2.5 px-4 font-bold text-slate-700 bg-slate-100">শিক্ষাগত যোগ্যতা</th>
-            <td class="py-2.5 px-4 font-semibold text-slate-800">{{ page.qualification | default: 'অফিশিয়াল বিজ্ঞপ্তিতে বিস্তারিত' }}</td>
+            <th class="py-3 px-4 font-bold text-slate-700 bg-slate-100/70">Educational Qualification</th>
+            <td class="py-3 px-4 font-semibold text-slate-800">{{ page.qualification | default: 'Detailed in Notification' }}</td>
           </tr>
           <tr class="border-b border-slate-200">
-            <th class="py-2.5 px-4 font-bold text-slate-700 bg-slate-100">বয়সসীমা</th>
-            <td class="py-2.5 px-4 text-slate-800">{{ page.age_limit | default: 'নিয়মানুযায়ী ছাড় প্রযোজ্য' }}</td>
+            <th class="py-3 px-4 font-bold text-slate-700 bg-slate-100/70">Age Limit</th>
+            <td class="py-3 px-4 text-slate-800">{{ page.age_limit | default: 'As per Govt Norms (Relaxations Applicable)' }}</td>
           </tr>
           <tr class="border-b border-slate-200">
-            <th class="py-2.5 px-4 font-bold text-slate-700 bg-slate-100">আবেদনের শেষ তারিখ</th>
-            <td class="py-2.5 px-4 font-bold text-red-600">{{ page.last_date | default: 'শীঘ্রই সমাপ্ত' }}</td>
+            <th class="py-3 px-4 font-bold text-slate-700 bg-slate-100/70">Application Deadline</th>
+            <td class="py-3 px-4 font-bold text-red-600">{{ page.last_date | default: 'Closing Soon' }}</td>
           </tr>
           <tr>
-            <th class="py-2.5 px-4 font-bold text-slate-700 bg-slate-100">আবেদন পদ্ধতি</th>
-            <td class="py-2.5 px-4 font-semibold text-blue-700">{{ page.apply_mode | default: 'অনলাইন (Online)' }}</td>
+            <th class="py-3 px-4 font-bold text-slate-700 bg-slate-100/70">Application Mode</th>
+            <td class="py-3 px-4 font-semibold text-blue-700">{{ page.apply_mode | default: 'Online' }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <!-- Quick Action / Official Links Buttons -->
-    <div class="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t border-slate-100">
+    <div class="flex flex-wrap items-center gap-3 mt-6 pt-5 border-t border-slate-100">
       
-      <!-- 1. ONLINE APPLY (If active, goes to actual application portal; if not, shows status) -->
+      <!-- 1. ONLINE APPLY BUTTON -->
       {% if page.apply_link and page.apply_link != "" and page.apply_link != page.official_link %}
-        <a href="{{ page.apply_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
-          <i class="fas fa-edit"></i> {{ page.apply_btn_text | default: "অনলাইনে আবেদন করুন" }}
+        <a href="{{ page.apply_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-xl shadow transition">
+          <i class="fas fa-edit"></i> {{ page.apply_btn_text | default: "Apply Online" }}
         </a>
       {% elsif page.apply_status %}
-        <span class="inline-flex items-center gap-2 bg-amber-50 border border-amber-300 text-amber-900 font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg">
+        <span class="inline-flex items-center gap-2 bg-amber-50 border border-amber-300 text-amber-900 font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl">
           <i class="fas fa-clock text-amber-600"></i> {{ page.apply_status }}
         </span>
       {% else %}
-        <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
-          <i class="fas fa-edit"></i> {{ page.apply_btn_text | default: "অনলাইন পোর্টাল" }}
+        <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-xl shadow transition">
+          <i class="fas fa-edit"></i> {{ page.apply_btn_text | default: "Online Portal" }}
         </a>
       {% endif %}
 
-      <!-- 2. OFFICIAL BIGGOPTI / NOTIFICATION (ALWAYS downloads/opens direct PDF if available) -->
+      <!-- 2. OFFICIAL NOTIFICATION (DIRECT PDF DOWNLOAD) -->
       {% if page.pdf_link and page.pdf_link != "" and page.pdf_link != page.official_link %}
-        <a href="{{ page.pdf_link }}" target="_blank" download rel="noopener nofollow" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
-          <i class="fas fa-file-download"></i> অফিসিয়াল বিজ্ঞপ্তি (PDF ডাউনলোড)
+        <a href="{{ page.pdf_link }}" target="_blank" download rel="noopener nofollow" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-xl shadow transition">
+          <i class="fas fa-file-download"></i> Official Notification (PDF)
         </a>
       {% else %}
-        <span class="inline-flex items-center gap-2 bg-slate-100 text-slate-600 border border-slate-200 font-semibold text-xs md:text-sm px-4 py-2.5 rounded-lg">
-          <i class="fas fa-file-alt text-slate-400"></i> অফিসিয়াল বিজ্ঞপ্তি শীঘ্রই আপলোড হবে
+        <span class="inline-flex items-center gap-2 bg-slate-100 text-slate-600 border border-slate-200 font-semibold text-xs md:text-sm px-4 py-2.5 rounded-xl">
+          <i class="fas fa-file-alt text-slate-400"></i> Official Notice Uploading Soon
         </span>
       {% endif %}
 
-      <!-- 3. OFFICIAL WEBSITE (ALWAYS redirects directly to the department's home portal) -->
+      <!-- 3. OFFICIAL WEBSITE -->
       {% if page.official_link %}
-        <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition">
-          <i class="fas fa-globe"></i> অফিশিয়াল ওয়েবসাইট
+        <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-xl shadow transition">
+          <i class="fas fa-globe"></i> Official Website
         </a>
       {% endif %}
 
     </div>
   </header>
 
-  <!-- Share on WhatsApp / Telegram Bar -->
-  <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-    <div class="flex items-center gap-2 text-amber-900 font-semibold">
-      <i class="fas fa-share-alt text-amber-600 text-base"></i>
-      <span>চাকরির সন্ধান করছেন এমন বন্ধুদের সাথে শেয়ার করুন:</span>
+  <!-- Share with Friends Bar -->
+  <div class="bg-slate-100 border border-slate-200 rounded-2xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+    <div class="flex items-center gap-2 text-slate-700 font-semibold">
+      <i class="fas fa-share-alt text-emerald-600 text-base"></i>
+      <span>Share this job vacancy with friends &amp; aspirants:</span>
     </div>
     <div class="flex items-center gap-2">
-      <a href="https://api.whatsapp.com/send?text={{ page.title | url_encode }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank" rel="noopener" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-md font-bold flex items-center gap-1 transition">
-        <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ
+      <a href="https://api.whatsapp.com/send?text={{ page.title | url_encode }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank" rel="noopener" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition shadow-sm">
+        <i class="fab fa-whatsapp"></i> WhatsApp
       </a>
-      <a href="https://t.me/share/url?url={{ site.url }}{{ site.baseurl }}{{ page.url }}&text={{ page.title | url_encode }}" target="_blank" rel="noopener" class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-1.5 rounded-md font-bold flex items-center gap-1 transition">
-        <i class="fab fa-telegram"></i> টেলিগ্রাম
+      <a href="https://t.me/share/url?url={{ site.url }}{{ site.baseurl }}{{ page.url }}&text={{ page.title | url_encode }}" target="_blank" rel="noopener" class="bg-sky-500 hover:bg-sky-600 text-white px-3.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition shadow-sm">
+        <i class="fab fa-telegram-plane"></i> Telegram
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition shadow-sm">
+        <i class="fab fa-facebook-f"></i> Facebook
       </a>
     </div>
   </div>
 
   <!-- Detailed Markdown Content (Generated by AI / Scraper) -->
-  <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 job-content text-slate-800 leading-relaxed">
+  <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 job-content text-slate-800 leading-relaxed">
     {{ content }}
   </div>
 
   <!-- Bottom Important Official Links Box -->
-  <div class="mt-8 bg-slate-100 rounded-xl p-6 border border-slate-200">
-    <h3 class="font-bold text-base text-slate-900 mb-3 flex items-center gap-2">
-      <i class="fas fa-link text-emerald-600"></i> প্রয়োজনীয় অফিশিয়াল লিঙ্কসমূহ
+  <div class="mt-8 bg-slate-100 rounded-2xl p-6 border border-slate-200">
+    <h3 class="font-bold text-base text-slate-900 mb-3 flex items-center gap-2 font-display">
+      <i class="fas fa-link text-emerald-600"></i> Important Official Links &amp; Direct Downloads
     </h3>
     <ul class="space-y-2.5 text-xs md:text-sm">
       {% if page.pdf_link and page.pdf_link != "" and page.pdf_link != page.official_link %}
-      <li class="flex items-center gap-2">
-        <span class="font-bold text-red-600"><i class="fas fa-file-pdf"></i> অফিসিয়াল বিজ্ঞপ্তি সরাসরি ডাউনলোড (PDF):</span>
+      <li class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+        <span class="font-bold text-red-600 whitespace-nowrap"><i class="fas fa-file-pdf mr-1"></i> Official PDF Notification:</span>
         <a href="{{ page.pdf_link }}" target="_blank" download rel="noopener nofollow" class="text-red-700 hover:underline break-all font-semibold">{{ page.pdf_link }}</a>
       </li>
       {% endif %}
       
       {% if page.apply_link and page.apply_link != "" and page.apply_link != page.official_link %}
-      <li class="flex items-center gap-2">
-        <span class="font-bold text-emerald-700"><i class="fas fa-edit"></i> অনলাইনে আবেদনের সরাসরি পোর্টাল লিঙ্ক:</span>
+      <li class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+        <span class="font-bold text-emerald-700 whitespace-nowrap"><i class="fas fa-edit mr-1"></i> Online Application Portal:</span>
         <a href="{{ page.apply_link }}" target="_blank" rel="noopener nofollow" class="text-emerald-700 hover:underline break-all font-semibold">{{ page.apply_link }}</a>
       </li>
       {% elsif page.apply_status %}
       <li class="flex items-center gap-2">
-        <span class="font-bold text-amber-700"><i class="fas fa-clock"></i> অনলাইন আবেদন স্থিতি:</span>
+        <span class="font-bold text-amber-700"><i class="fas fa-clock mr-1"></i> Application Status:</span>
         <span class="text-amber-800 font-semibold">{{ page.apply_status }}</span>
       </li>
       {% endif %}
 
       {% if page.official_link %}
-      <li class="flex items-center gap-2">
-        <span class="font-bold text-slate-700"><i class="fas fa-globe"></i> সংশ্লিষ্ট দপ্তরের মূল অফিসিয়াল ওয়েবসাইট:</span>
+      <li class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+        <span class="font-bold text-slate-700 whitespace-nowrap"><i class="fas fa-globe mr-1"></i> Official Organization Website:</span>
         <a href="{{ page.official_link }}" target="_blank" rel="noopener nofollow" class="text-blue-600 hover:underline break-all">{{ page.official_link }}</a>
       </li>
       {% endif %}
@@ -158,7 +166,7 @@ layout: default
   </div>
 
   <!-- Disclaimer -->
-  <div class="mt-6 text-xs text-slate-500 bg-slate-50 p-4 rounded-lg border border-slate-200 leading-relaxed">
-    <strong>দাবিত্যাগ (Disclaimer):</strong> আমরা কোনো সরকারি নিয়োগকারী সংস্থা নই। উপরের সমস্ত তথ্য বিজ্ঞপ্তির ভিত্তিতে সাধারণ অবগতির জন্য প্রদান করা হয়েছে। আবেদন করার আগে প্রার্থীরা অবশ্যই সংশ্লিষ্ট দপ্তরের মূল অফিশিয়াল বিজ্ঞপ্তি ভালোভাবে পড়ে নেবেন। কোনো তথ্যের অসামঞ্জস্যের জন্য কর্তৃপক্ষ দায়ী থাকবে না।
+  <div class="mt-6 text-xs text-slate-500 bg-slate-50 p-4 rounded-xl border border-slate-200 leading-relaxed">
+    <strong>Disclaimer:</strong> KarmaSangbad is an informational platform intended to provide recruitment information to job aspirants across India. We are not a government agency and do not conduct recruitments directly. Candidates must thoroughly read the official notification on the relevant commission/board's website before applying.
   </div>
 </article>

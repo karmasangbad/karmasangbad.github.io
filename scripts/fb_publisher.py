@@ -12,13 +12,11 @@ os.makedirs(BANNERS_DIR, exist_ok=True)
 
 def find_browser_executable():
     """Finds available Chrome or Edge browser on Windows or Linux."""
-    # Check PATH first
     for name in ["google-chrome", "google-chrome-stable", "chromium-browser", "chromium", "chrome", "msedge"]:
         path = shutil.which(name)
         if path:
             return path
 
-    # Common Windows paths
     win_paths = [
         r"C:\Program Files\Google\Chrome\Application\chrome.exe",
         r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
@@ -29,7 +27,6 @@ def find_browser_executable():
         if os.path.exists(p):
             return p
 
-    # Common Linux paths
     linux_paths = ["/usr/bin/google-chrome", "/usr/bin/chromium-browser", "/usr/bin/chromium"]
     for p in linux_paths:
         if os.path.exists(p):
@@ -39,91 +36,132 @@ def find_browser_executable():
 
 def generate_fb_banner(notice, slug):
     """
-    Generates a 1200x630 Facebook banner image with Bengali typography.
+    Generates a 1200x630 Facebook banner image with modern typography.
     Returns the path to the generated PNG image.
     """
-    title = notice.get("title", "সরকারি চাকরির খবর")
+    title = notice.get("title", "Government Job Recruitment")
     department = notice.get("department", "Government Organization")
-    category = notice.get("category", "পশ্চিমবঙ্গ সরকার")
-    vacancies = notice.get("vacancies", "বিজ্ঞপ্তি দেখুন")
-    qualification = notice.get("qualification", "নোটিফিকেশন দেখুন")
-    last_date = notice.get("last_date", "শীঘ্রই সমাপ্ত")
+    category = notice.get("category", "All India Govt Jobs")
+    state = notice.get("state", "All India")
+    vacancies = notice.get("vacancies", "Refer Notice")
+    qualification = notice.get("qualification", "Check Notification")
+    last_date = notice.get("last_date", "Closing Soon")
+
+    output_filename = f"fb_{slug}.png"
+    output_path = os.path.join(BANNERS_DIR, output_filename)
+
+    browser_bin = find_browser_executable()
+    if not browser_bin:
+        print("[FB Banner] Chrome/Chromium/Edge browser not found. Skipping banner generation.")
+        return None
 
     html_content = f"""<!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@700;800&family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+    * {{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }}
     body {{
       width: 1200px;
       height: 630px;
-      font-family: 'Hind Siliguri', sans-serif;
-      background: linear-gradient(135deg, #091a28 0%, #0f3d3e 50%, #064e3b 100%);
+      overflow: hidden;
+      font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      background: linear-gradient(135deg, #091e17 0%, #064e3b 50%, #0f172a 100%);
       color: #ffffff;
-      padding: 45px 55px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      overflow: hidden;
+      padding: 45px 55px;
+      position: relative;
+    }}
+    .bg-accent {{
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }}
+    .bg-accent-bottom {{
+      position: absolute;
+      bottom: -150px;
+      left: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6, 95, 70, 0.3) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }}
     .header {{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 10;
     }}
-    .brand {{
+    .brand-logo {{
       display: flex;
       align-items: center;
       gap: 12px;
     }}
     .brand-icon {{
-      background: #22c55e;
-      color: #091a28;
       width: 44px;
       height: 44px;
-      border-radius: 10px;
+      background: #10b981;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      font-weight: bold;
+      font-weight: 800;
+      font-size: 22px;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
     }}
     .brand-name {{
-      font-size: 26px;
-      font-weight: 700;
-      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }}
-    .brand-tag {{
-      color: #4ade80;
+    .brand-name span {{
+      color: #34d399;
     }}
     .category-badge {{
-      background: rgba(34, 197, 94, 0.2);
-      border: 1.5px solid #22c55e;
-      color: #4ade80;
-      padding: 6px 18px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1.5px solid #10b981;
+      color: #6ee7b7;
+      padding: 6px 20px;
       border-radius: 30px;
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }}
     .main-content {{
       margin: 15px 0;
+      z-index: 10;
     }}
     .dept-title {{
       font-size: 20px;
       color: #94a3b8;
       font-weight: 600;
       margin-bottom: 8px;
-      text-transform: uppercase;
       letter-spacing: 0.5px;
     }}
     .job-title {{
+      font-family: 'Poppins', 'Hind Siliguri', sans-serif;
       font-size: 38px;
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.25;
       color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
       margin-bottom: 25px;
       max-height: 110px;
       overflow: hidden;
@@ -138,17 +176,21 @@ def generate_fb_banner(notice, slug):
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 14px;
-      padding: 14px 18px;
+      padding: 14px 20px;
     }}
     .card-label {{
-      font-size: 15px;
+      font-size: 14px;
       color: #cbd5e1;
       margin-bottom: 4px;
+      font-weight: 500;
     }}
     .card-value {{
       font-size: 20px;
       font-weight: 700;
       color: #fef08a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }}
     .footer {{
       display: flex;
@@ -156,86 +198,84 @@ def generate_fb_banner(notice, slug):
       align-items: center;
       padding-top: 15px;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 10;
     }}
     .website-url {{
-      font-size: 20px;
-      color: #38bdf8;
-      font-weight: 600;
-    }}
-    .cta-btn {{
-      background: #22c55e;
-      color: #0f172a;
       font-size: 18px;
-      font-weight: 700;
+      color: #a7f3d0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }}
+    .apply-badge {{
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
       padding: 10px 24px;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+      font-size: 17px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
     }}
   </style>
 </head>
 <body>
+  <div class="bg-accent"></div>
+  <div class="bg-accent-bottom"></div>
+
   <div class="header">
-    <div class="brand">
+    <div class="brand-logo">
       <div class="brand-icon">💼</div>
-      <div class="brand-name">চাকরির <span class="brand-tag">খবর</span> (KarmaSangbad)</div>
+      <div class="brand-name">Karma<span>Sangbad</span></div>
     </div>
     <div class="category-badge">{category}</div>
   </div>
 
   <div class="main-content">
-    <div class="dept-title">{department}</div>
+    <div class="dept-title">{department} • {state}</div>
     <div class="job-title">{title}</div>
-
+    
     <div class="highlights-grid">
       <div class="card">
-        <div class="card-label">মোট শূন্যপদ:</div>
+        <div class="card-label">Total Vacancies</div>
         <div class="card-value">{vacancies}</div>
       </div>
       <div class="card">
-        <div class="card-label">শিক্ষাগত যোগ্যতা:</div>
+        <div class="card-label">Educational Qualification</div>
         <div class="card-value">{qualification}</div>
       </div>
       <div class="card">
-        <div class="card-label">আবেদনের শেষ তারিখ:</div>
+        <div class="card-label">Last Date to Apply</div>
         <div class="card-value" style="color: #f87171;">{last_date}</div>
       </div>
     </div>
   </div>
 
   <div class="footer">
-    <div class="website-url">🌐 সম্পূর্ণ তথ্য ও আবেদন: karmasangbad.github.io</div>
-    <div class="cta-btn">অনলাইনে আবেদন লিঙ্ক ➔</div>
+    <div class="website-url">🌐 karmasangbad.github.io • All India Govt Job News</div>
+    <div class="apply-badge">Apply Online Now →</div>
   </div>
 </body>
 </html>
 """
-    output_png = os.path.join(BANNERS_DIR, f"{slug}.png")
 
-    # Render via headless browser
-    browser_exe = find_browser_executable()
-    if not browser_exe:
-        print("[FB Banner] Warning: No Chrome/Edge browser found. Skipping banner render.")
-        return None
-
-    with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8") as tf:
-        tf.write(html_content)
-        temp_html_path = tf.name
+    temp_html_fd, temp_html_path = tempfile.mkstemp(suffix=".html", prefix="fb_card_")
+    with os.fdopen(temp_html_fd, "w", encoding="utf-8") as f:
+        f.write(html_content)
 
     try:
         cmd = [
-            browser_exe,
+            browser_bin,
             "--headless=new",
-            "--no-sandbox",
             "--disable-gpu",
-            "--hide-scrollbars",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
             f"--window-size=1200,630",
-            f"--screenshot={output_png}",
-            f"file:///{temp_html_path.replace(os.sep, '/')}"
+            f"--screenshot={output_path}",
+            f"file:///{os.path.abspath(temp_html_path).replace(os.sep, '/')}"
         ]
-        subprocess.run(cmd, capture_output=True, timeout=20)
-        if os.path.exists(output_png) and os.path.getsize(output_png) > 1000:
-            print(f"[FB Banner] Successfully generated: assets/banners/{slug}.png")
-            return output_png
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=20)
+        if os.path.exists(output_path) and os.path.getsize(output_path) > 1000:
+            print(f"[FB Banner] Successfully generated banner: {output_path}")
+            return output_path
     except Exception as e:
         print(f"[FB Banner] Render error: {e}")
     finally:
@@ -251,14 +291,15 @@ def post_to_facebook_page(image_path, caption):
     """
     Uploads a photo with description and article link to Facebook Page via Graph API.
     """
-    page_id = os.environ.get("FB_PAGE_ID", "61596771963967").strip()
+    page_id = os.environ.get("FB_PAGE_ID", "1586846211175136").strip()
     access_token = os.environ.get("FB_PAGE_ACCESS_TOKEN", "").strip()
 
-    if not page_id or not access_token:
-        print("[Facebook Bot] FB_PAGE_ID or FB_PAGE_ACCESS_TOKEN not set in environment. Skipping Facebook post.")
+    if not access_token:
+        print("[Facebook Bot] FB_PAGE_ACCESS_TOKEN not set in environment. Skipping Facebook post.")
         return False
 
-    url = f"https://graph.facebook.com/v19.0/{page_id}/photos"
+    # Using {page_id}/photos or me/photos with Page Access Token
+    url = f"https://graph.facebook.com/v19.0/{page_id}/photos" if page_id else "https://graph.facebook.com/v19.0/me/photos"
     payload = {
         "caption": caption,
         "access_token": access_token
@@ -282,42 +323,46 @@ def post_to_facebook_page(image_path, caption):
 
 def auto_publish_job_to_fb(notice, article_url, slug):
     """
-    Generates banner and publishes to Facebook Page.
+    Generates banner and publishes to Facebook Page for All India audiences.
     """
-    title = notice.get("title", "নতুন সরকারি চাকরির বিজ্ঞপ্তি")
-    department = notice.get("department", "সরকারি দপ্তর")
-    vacancies = notice.get("vacancies", "বিজ্ঞপ্তি অনুযায়ী")
-    qualification = notice.get("qualification", "নোটিফিকেশন দেখুন")
-    last_date = notice.get("last_date", "শীঘ্রই সমাপ্ত")
+    title = notice.get("title", "New Government Job Recruitment")
+    department = notice.get("department", "Government Organization")
+    category = notice.get("category", "All India Govt Jobs")
+    state = notice.get("state", "All India")
+    vacancies = notice.get("vacancies", "Refer Notification")
+    qualification = notice.get("qualification", "Check Notification")
+    last_date = notice.get("last_date", "Closing Soon")
 
     banner_path = generate_fb_banner(notice, slug)
     if not banner_path:
         print("[Facebook Bot] Could not create banner image.")
         return False
 
-    caption = f"""📢 নতুন সরকারি চাকরির বিজ্ঞপ্তি প্রকাশিত হয়েছে!
+    caption = f"""📢 NEW GOVT JOB RECRUITMENT NOTIFICATION OUT!
 
-📌 পদের নাম: {title}
-🏛 দপ্তর/সংস্থা: {department}
-👥 মোট শূন্যপদ: {vacancies}
-🎓 শিক্ষাগত যোগ্যতা: {qualification}
-🗓 আবেদনের শেষ তারিখ: {last_date}
+📌 Post: {title}
+🏛 Organization: {department}
+🗺 Location: {state}
+👥 Total Vacancies: {vacancies}
+🎓 Eligibility: {qualification}
+🗓 Last Date to Apply: {last_date}
 
-👉 কীভাবে ধাপে ধাপে আবেদন করবেন এবং অফিশিয়াল নোটিফিকেশন PDF ডাউনলোড করতে নিচের লিংকে ক্লিক করুন:
+👉 Step-by-step application procedure, eligibility criteria & direct PDF notification download:
 🔗 {article_url}
 
-#পশ্চিমবঙ্গ_চাকরি #সরকারি_চাকরি #WBJobs #KarmaSangbad #GovtJobs #JobAlert
+#GovtJobs #SarkariNaukri #AllIndiaJobs #JobAlert #CentralGovtJobs #RailwayJobs #BankJobs #SSC #UPSC #Recruitment2026
 """
     return post_to_facebook_page(banner_path, caption)
 
 if __name__ == "__main__":
     sample_notice = {
-        "title": "পশ্চিমবঙ্গ পুলিশ কনস্টেবল ও লেডি কনস্টেবল নিয়োগ ২০২৬",
-        "department": "West Bengal Police Recruitment Board (WBPRB)",
-        "category": "পুলিশ ও ডিফেন্স",
-        "vacancies": "১০,০০০+ পদ",
-        "qualification": "মাধ্যমিক পাস",
-        "last_date": "২০ জানুয়ারি ২০২৭"
+        "title": "SSC CGL 2026: Apply Online for 15,000+ Group B & C Posts",
+        "department": "Staff Selection Commission (SSC)",
+        "category": "Central Govt Jobs",
+        "state": "All India",
+        "vacancies": "15,000+ Posts",
+        "qualification": "Graduate in any discipline",
+        "last_date": "30 January 2027"
     }
-    banner = generate_fb_banner(sample_notice, "sample_test_job")
+    banner = generate_fb_banner(sample_notice, "sample_all_india_test")
     print("Test banner created at:", banner)

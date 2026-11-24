@@ -3,10 +3,10 @@
   "@context": "https://schema.org/",
   "@type": "JobPosting",
   "title": "{{ page.title | escape }}",
-  "description": "{{ page.content | strip_html | truncatewords: 60 | escape }}",
+  "description": "{{ page.content | strip_html | truncatewords: 80 | escape }}",
   "identifier": {
     "@type": "PropertyValue",
-    "name": "{{ page.department | default: 'Government Recruitment' | escape }}",
+    "name": "{{ page.department | default: 'Government of India' | escape }}",
     "value": "{{ page.id | escape }}"
   },
   "datePosted": "{{ page.date | date: '%Y-%m-%d' }}",
@@ -14,15 +14,15 @@
   "employmentType": "FULL_TIME",
   "hiringOrganization": {
     "@type": "Organization",
-    "name": "{{ page.department | default: 'Government of West Bengal / India' | escape }}",
+    "name": "{{ page.department | default: 'Government of India / State Government' | escape }}",
     "sameAs": "{{ page.official_link | default: site.url }}"
   },
   "jobLocation": {
     "@type": "Place",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "{{ page.location | default: 'West Bengal' | escape }}",
-      "addressRegion": "{{ page.location | default: 'West Bengal' | escape }}",
+      "addressLocality": "{{ page.state | default: page.location | default: 'All India' | escape }}",
+      "addressRegion": "{{ page.state | default: page.location | default: 'Across India' | escape }}",
       "addressCountry": "IN"
     }
   }

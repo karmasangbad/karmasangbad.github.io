@@ -101,7 +101,8 @@ def get_wbprb_notices(limit=5):
                     "apply_btn_text": btn_text,
                     "apply_status": apply_status,
                     "department": "West Bengal Police Recruitment Board (WBPRB)",
-                    "category": "পুলিশ ও ডিফেন্স",
+                    "category": "Defence & Police",
+                    "state": "West Bengal",
                     "source": "WBPRB"
                 })
 

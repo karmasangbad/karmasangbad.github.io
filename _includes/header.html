@@ -1,24 +1,24 @@
 <!-- Top Notice / Social Bar -->
-<div class="bg-slate-900 text-white text-xs md:text-sm py-2 px-4">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+<div class="bg-slate-900 text-white text-xs md:text-sm py-2 px-4 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
     <div class="flex items-center gap-2">
-      <span class="bg-red-600 text-white font-bold px-2 py-0.5 rounded text-[11px] uppercase tracking-wide">আপডেট</span>
-      <span>প্রতিদিনের সরকারি চাকরির সঠিক খবর ও আবেদন পদ্ধতি বাংলায়</span>
+      <span class="bg-red-600 text-white font-bold px-2 py-0.5 rounded text-[10px] tracking-wide uppercase">Live Updates</span>
+      <span class="text-slate-200">🇮🇳 All India Govt Job News • Central, Railway, Banking, Defence & State Recruitments</span>
     </div>
     <div class="flex items-center gap-3">
       {% if site.author.facebook %}
-      <a href="{{ site.author.facebook }}" target="_blank" rel="noopener" class="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 px-2.5 py-1 rounded-full text-white font-medium transition">
-        <i class="fab fa-facebook-f"></i> <span>ফেসবুক পেজ</span>
+      <a href="{{ site.author.facebook }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 px-2.5 py-1 rounded-full text-white text-xs font-medium transition shadow-sm">
+        <i class="fab fa-facebook-f"></i> <span>Facebook</span>
       </a>
       {% endif %}
       {% if site.author.telegram %}
-      <a href="{{ site.author.telegram }}" target="_blank" rel="noopener" class="flex items-center gap-1 bg-sky-500 hover:bg-sky-600 px-2.5 py-1 rounded-full text-white font-medium transition">
-        <i class="fab fa-telegram"></i> <span>টেলিগ্রাম চ্যানেল</span>
+      <a href="{{ site.author.telegram }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 bg-sky-500 hover:bg-sky-600 px-2.5 py-1 rounded-full text-white text-xs font-medium transition shadow-sm">
+        <i class="fab fa-telegram"></i> <span>Telegram</span>
       </a>
       {% endif %}
       {% if site.author.whatsapp %}
-      <a href="{{ site.author.whatsapp }}" target="_blank" rel="noopener" class="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 px-2.5 py-1 rounded-full text-white font-medium transition">
-        <i class="fab fa-whatsapp"></i> <span>হোয়াটসঅ্যাপ গ্রুপ</span>
+      <a href="{{ site.author.whatsapp }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 px-2.5 py-1 rounded-full text-white text-xs font-medium transition shadow-sm">
+        <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
       </a>
       {% endif %}
     </div>
@@ -27,36 +27,48 @@
 
 <!-- Main Navigation Header -->
 <header class="bg-white shadow-sm border-b sticky top-0 z-40">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
     <!-- Brand Logo -->
     <a href="{{ site.baseurl }}/" class="flex items-center gap-2.5 group">
-      <div class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xl shadow-md group-hover:bg-emerald-700 transition">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-bold text-xl shadow-md group-hover:from-emerald-700 group-hover:to-teal-600 transition">
         <i class="fas fa-briefcase"></i>
       </div>
       <div>
-        <h1 class="text-xl md:text-2xl font-bold text-slate-800 tracking-tight leading-tight">
-          চাকরির <span class="text-emerald-600">খবর</span>
+        <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
+          Karma<span class="text-emerald-600">Sangbad</span>
         </h1>
-        <p class="text-[11px] text-slate-500 font-medium">KarmaSangbad • সরকারি চাকরির আপডেট</p>
+        <p class="text-[11px] text-slate-500 font-medium">All India Govt Job News • Sarkari Recruitment</p>
       </div>
     </a>
 
     <!-- Navigation Links -->
-    <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-semibold text-slate-700">
-      <a href="{{ site.baseurl }}/" class="px-3 py-1.5 rounded-md hover:text-emerald-600 hover:bg-emerald-50 transition">মূল পাতা</a>
-      <a href="{{ site.baseurl }}/#wb-jobs" class="px-3 py-1.5 rounded-md hover:text-emerald-600 hover:bg-emerald-50 transition">পশ্চিমবঙ্গ সরকার</a>
-      <a href="{{ site.baseurl }}/#central-jobs" class="px-3 py-1.5 rounded-md hover:text-emerald-600 hover:bg-emerald-50 transition">কেন্দ্রীয় সরকার</a>
-      <a href="{{ site.baseurl }}/#police-jobs" class="px-3 py-1.5 rounded-md hover:text-emerald-600 hover:bg-emerald-50 transition">পুলিশ ও ডিফেন্স</a>
-      <a href="{{ site.baseurl }}/#tenth-pass" class="px-3 py-1.5 rounded-md hover:text-emerald-600 hover:bg-emerald-50 transition">১০ম পাস চাকরি</a>
-      <a href="{{ site.baseurl }}/#karmasangsthan" class="px-3 py-1.5 rounded-md hover:text-emerald-600 hover:bg-emerald-50 transition">কর্মসংস্থান পেপার</a>
+    <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-slate-700">
+      <a href="{{ site.baseurl }}/" class="px-3 py-1.5 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition">Home</a>
+      <a href="{{ site.baseurl }}/#central-jobs" class="px-3 py-1.5 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition">Central Govt</a>
+      <a href="{{ site.baseurl }}/#railway-jobs" class="px-3 py-1.5 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition">Railways (RRB)</a>
+      <a href="{{ site.baseurl }}/#bank-jobs" class="px-3 py-1.5 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition">Bank & PSU</a>
+      <a href="{{ site.baseurl }}/#defence-jobs" class="px-3 py-1.5 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition">Defence & Police</a>
+      <a href="{{ site.baseurl }}/#state-jobs" class="px-3 py-1.5 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition">State Jobs</a>
+      <a href="{{ site.baseurl }}/#tenth-pass" class="px-3 py-1.5 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition">10th / 12th Pass</a>
     </nav>
 
     <!-- Search Input Shortcut -->
     <div class="flex items-center gap-2">
       <div class="relative hidden sm:block">
-        <input type="text" id="headerSearchInput" placeholder="চাকরি খুঁজুন (যেমন: SSC, পুলিশ, WBPSC)..." class="w-48 lg:w-64 pl-8 pr-3 py-1.5 text-xs rounded-full border border-slate-300 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
+        <input type="text" id="headerSearchInput" placeholder="Search jobs (SSC, Railway, UPSC)..." class="w-48 xl:w-64 pl-8 pr-3 py-1.5 text-xs rounded-full border border-slate-300 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
         <i class="fas fa-search absolute left-2.5 top-2 text-slate-400 text-xs"></i>
       </div>
     </div>
+  </div>
+
+  <!-- Mobile Category Strip -->
+  <div class="lg:hidden border-t border-slate-100 overflow-x-auto py-2 px-4 flex items-center gap-2 text-xs font-semibold whitespace-nowrap bg-slate-50">
+    <a href="{{ site.baseurl }}/" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Home</a>
+    <a href="{{ site.baseurl }}/#central-jobs" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Central Govt</a>
+    <a href="{{ site.baseurl }}/#railway-jobs" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Railways</a>
+    <a href="{{ site.baseurl }}/#bank-jobs" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Banking</a>
+    <a href="{{ site.baseurl }}/#defence-jobs" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Defence</a>
+    <a href="{{ site.baseurl }}/#state-jobs" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">State Jobs</a>
+    <a href="{{ site.baseurl }}/#tenth-pass" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">10th Pass</a>
   </div>
 </header>

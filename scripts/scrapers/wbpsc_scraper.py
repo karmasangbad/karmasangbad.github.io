@@ -65,7 +65,8 @@ def get_wbpsc_notices(limit=5):
                     "apply_btn_text": "WBPSC অনলাইন আবেদন ও OTR পোর্টাল",
                     "apply_status": "অনলাইন আবেদন বিজ্ঞপ্তি অনুযায়ী সক্রিয় হবে",
                     "department": "West Bengal Public Service Commission (WBPSC)",
-                    "category": "পশ্চিমবঙ্গ সরকার",
+                    "category": "State Govt Jobs (West Bengal)",
+                    "state": "West Bengal",
                     "source": "WBPSC"
                 })
 

@@ -3,146 +3,203 @@ layout: default
 ---
 
 <!-- Hero Section with Live Search -->
-<section class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-900 text-white py-10 px-4 shadow-inner">
-  <div class="max-w-4xl mx-auto text-center">
-    <span class="inline-block bg-emerald-500/30 text-emerald-200 border border-emerald-400/30 rounded-full px-3 py-1 text-xs font-semibold mb-3">
-      <i class="fas fa-bullhorn mr-1"></i> প্রতিদিন সকালের আপডেট
-    </span>
-    <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-3">
-      পশ্চিমবঙ্গ ও কেন্দ্রীয় সরকারি চাকরির খবর
+<section class="bg-gradient-to-r from-slate-900 via-emerald-950 to-teal-900 text-white py-12 px-4 shadow-inner border-b border-emerald-800/40">
+  <div class="max-w-5xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full px-3.5 py-1 text-xs font-semibold mb-4 backdrop-blur-sm">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span>Daily All India Govt Job Alerts • Updated Live</span>
+    </div>
+    
+    <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tight mb-4 font-display leading-tight">
+      All India Government Job Updates &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Sarkari Recruitment</span>
     </h1>
-    <p class="text-emerald-100 text-sm md:text-base max-w-2xl mx-auto mb-6">
-      WBPSC, WBPRB (পুলিশ), SSC, রেলওয়ে, ব্যাংক ও কেন্দ্র-রাজ্য সরকারের সমস্ত নতুন নিয়োগের অফিশিয়াল বিজ্ঞপ্তি ও বাংলায় আবেদন নির্দেশিকা।
+    
+    <p class="text-slate-300 text-sm sm:text-base max-w-3xl mx-auto mb-8 leading-relaxed">
+      Daily notifications for Central Govt (UPSC, SSC), Indian Railways (RRB), Banking (IBPS/SBI), Defence &amp; Armed Forces, and State Govt recruitments with official PDF downloads &amp; direct apply portals.
     </p>
 
     <!-- Search Input -->
-    <div class="max-w-xl mx-auto relative">
-      <input type="text" id="liveSearchInput" placeholder="চাকরির নাম, বিভাগ বা শিক্ষাগত যোগ্যতা দিয়ে খুঁজুন..." class="w-full pl-11 pr-4 py-3 rounded-xl text-slate-800 text-sm font-medium shadow-lg border-2 border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300">
-      <i class="fas fa-search absolute left-4 top-3.5 text-slate-400 text-base"></i>
+    <div class="max-w-2xl mx-auto relative">
+      <input type="text" id="liveSearchInput" placeholder="Search by Job Role, Department, State, or Qualification (e.g. SSC, Railway, UPSC, 10th Pass)..." class="w-full pl-12 pr-4 py-3.5 rounded-2xl text-slate-900 text-sm font-medium shadow-2xl border-2 border-emerald-500/50 focus:outline-none focus:ring-4 focus:ring-emerald-400/30 bg-white">
+      <i class="fas fa-search absolute left-4.5 top-4 text-emerald-600 text-base"></i>
     </div>
   </div>
 </section>
 
 <!-- Main Job Listings Section -->
-<section class="max-w-6xl mx-auto px-4 py-8" id="jobs-section">
-  <!-- Filter Pills -->
-  <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-200">
-    <div class="flex flex-wrap items-center gap-2" id="filterButtons">
-      <button onclick="filterCategory('all')" data-filter="all" class="filter-btn active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm hover:bg-emerald-700 transition">সমস্ত বিজ্ঞপ্তি (All)</button>
-      <button onclick="filterCategory('পশ্চিমবঙ্গ')" data-filter="wb-jobs" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">পশ্চিমবঙ্গ সরকার</button>
-      <button onclick="filterCategory('কেন্দ্রীয়')" data-filter="central-jobs" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">কেন্দ্রীয় সরকার</button>
-      <button onclick="filterCategory('পুলিশ')" data-filter="police-jobs" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">পুলিশ ও ডিফেন্স</button>
-      <button onclick="filterCategory('SSC')" data-filter="ssc-jobs" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">SSC ও রেলওয়ে</button>
-      <button onclick="filterCategory('মাধ্যমিক')" data-filter="tenth-pass" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">🎓 ১০ম পাস (মাধ্যমিক)</button>
-      <button onclick="filterCategory('কর্মসংস্থান')" data-filter="karmasangsthan" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">📰 কর্মসংস্থান পেপার</button>
+<section class="max-w-7xl mx-auto px-4 py-8" id="jobs-section">
+  
+  <!-- Primary Category Filter Pills -->
+  <div class="mb-4 pb-3 border-b border-slate-200">
+    <div class="flex items-center justify-between gap-3 mb-3 flex-wrap">
+      <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+        <i class="fas fa-filter text-emerald-600"></i> Filter by Sector:
+      </span>
+      <span class="text-xs text-slate-500 font-semibold" id="jobCountDisplay">Total Active Notifications: {{ site.posts.size }}</span>
     </div>
-    <span class="text-xs text-slate-500 font-medium" id="jobCountDisplay">সর্বমোট প্রকাশিত বিজ্ঞপ্তি: {{ site.posts.size }} টি</span>
+
+    <div class="flex flex-wrap items-center gap-2" id="filterButtons">
+      <button onclick="filterCategory('all', this)" data-filter="all" class="filter-btn active px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-600 text-white shadow-sm hover:bg-emerald-700 transition">🌟 All India Jobs</button>
+      <button onclick="filterCategory('central', this)" data-filter="central-jobs" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">🏛️ Central Govt (UPSC/SSC)</button>
+      <button onclick="filterCategory('railway', this)" data-filter="railway-jobs" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">🚆 Railways (RRB)</button>
+      <button onclick="filterCategory('bank', this)" data-filter="bank-jobs" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">🏦 Bank &amp; PSU</button>
+      <button onclick="filterCategory('defence', this)" data-filter="defence-jobs" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">🎖️ Defence &amp; Police</button>
+      <button onclick="filterCategory('state', this)" data-filter="state-jobs" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">🗺️ State Govt Jobs</button>
+      <button onclick="filterCategory('10th', this)" data-filter="tenth-pass" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">🎓 10th / 12th Pass</button>
+      <button onclick="filterCategory('employment', this)" data-filter="employment-news" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition">📰 Employment News</button>
+    </div>
+  </div>
+
+  <!-- State Quick Tags -->
+  <div class="flex items-center gap-2 overflow-x-auto py-2 mb-6 text-xs text-slate-600 whitespace-nowrap">
+    <span class="font-bold text-slate-400 text-[11px] uppercase tracking-wide">Popular States:</span>
+    <button onclick="filterState('all')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">All States</button>
+    <button onclick="filterState('central')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">All India (Central)</button>
+    <button onclick="filterState('west bengal')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">West Bengal</button>
+    <button onclick="filterState('uttar pradesh')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">Uttar Pradesh</button>
+    <button onclick="filterState('bihar')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">Bihar</button>
+    <button onclick="filterState('delhi')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">Delhi / NCR</button>
+    <button onclick="filterState('maharashtra')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">Maharashtra</button>
+    <button onclick="filterState('rajasthan')" class="state-pill px-2.5 py-1 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition">Rajasthan</button>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Left Column: Job Cards Grid -->
     <div class="lg:col-span-2 space-y-4" id="jobListingsContainer">
       {% for post in site.posts %}
-      <article class="job-card bg-white rounded-xl p-5 shadow-sm hover:shadow-md border border-slate-200 transition-all group" 
+      <article class="job-card bg-white rounded-2xl p-5 shadow-sm hover:shadow-md border border-slate-200 transition-all group hover:border-emerald-300" 
                data-title="{{ post.title | downcase }}" 
                data-category="{{ post.category | downcase }} {{ post.tags | join: ' ' | downcase }}"
                data-department="{{ post.department | downcase }}"
-               data-qualification="{{ post.qualification | downcase }}">
-        <div class="flex items-center justify-between gap-2 mb-2">
-          <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full 
-            {% if post.category contains 'পশ্চিমবঙ্গ' %} bg-green-100 text-green-800 border border-green-200
-            {% elsif post.category contains 'কেন্দ্রীয়' %} bg-blue-100 text-blue-800 border border-blue-200
-            {% elsif post.category contains 'পুলিশ' %} bg-amber-100 text-amber-800 border border-amber-200
-            {% else %} bg-slate-100 text-slate-800 border border-slate-200 {% endif %}">
-            {{ post.category | default: 'সরকারি চাকরি' }}
-          </span>
+               data-qualification="{{ post.qualification | downcase }}"
+               data-state="{{ post.state | default: post.location | default: 'All India' | downcase }}">
+        
+        <div class="flex items-center justify-between gap-2 mb-2.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full 
+              {% if post.category contains 'Railway' or post.category contains 'রেলওয়ে' %} bg-purple-100 text-purple-800 border border-purple-200
+              {% elsif post.category contains 'Bank' or post.category contains 'ব্যাংক' %} bg-cyan-100 text-cyan-800 border border-cyan-200
+              {% elsif post.category contains 'Defence' or post.category contains 'পুলিশ' %} bg-amber-100 text-amber-800 border border-amber-200
+              {% elsif post.category contains 'Central' or post.category contains 'কেন্দ্রীয়' %} bg-blue-100 text-blue-800 border border-blue-200
+              {% elsif post.category contains 'West Bengal' or post.category contains 'পশ্চিমবঙ্গ' %} bg-emerald-100 text-emerald-800 border border-emerald-200
+              {% else %} bg-slate-100 text-slate-800 border border-slate-200 {% endif %}">
+              {{ post.category | default: 'Govt Job' }}
+            </span>
+            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+              <i class="fas fa-map-marker-alt text-slate-400 mr-1"></i>{{ post.state | default: post.location | default: 'All India' }}
+            </span>
+          </div>
           <span class="text-[12px] text-slate-400">
             <i class="far fa-clock mr-1"></i>{{ post.date | date: "%d %b %Y" }}
           </span>
         </div>
 
-        <h2 class="text-base md:text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition leading-snug mb-2">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition leading-snug mb-2 font-display">
           <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
         </h2>
 
         <!-- Quick Info Badges -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-slate-600 my-3 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-slate-600 my-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
           <div>
-            <span class="block text-[11px] text-slate-400">মোট শূন্যপদ:</span>
-            <span class="font-bold text-slate-800">{{ post.vacancies | default: 'অফিশিয়াল বিজ্ঞপ্তিতে দেখুন' }}</span>
+            <span class="block text-[11px] text-slate-400 font-medium">Total Vacancies:</span>
+            <span class="font-bold text-slate-800">{{ post.vacancies | default: 'Refer Notice' }}</span>
           </div>
           <div>
-            <span class="block text-[11px] text-slate-400">শিক্ষাগত যোগ্যতা:</span>
-            <span class="font-semibold text-slate-800">{{ post.qualification | default: 'নোটিফিকেশনে দেখুন' }}</span>
+            <span class="block text-[11px] text-slate-400 font-medium">Qualification:</span>
+            <span class="font-semibold text-slate-800 truncate block">{{ post.qualification | default: 'Check Notification' }}</span>
           </div>
           <div class="col-span-2 sm:col-span-1">
-            <span class="block text-[11px] text-slate-400">আবেদনের শেষ তারিখ:</span>
-            <span class="font-bold text-red-600">{{ post.last_date | default: 'শীঘ্রই সমাপ্ত' }}</span>
+            <span class="block text-[11px] text-slate-400 font-medium">Last Date:</span>
+            <span class="font-bold text-red-600">{{ post.last_date | default: 'Closing Soon' }}</span>
           </div>
         </div>
 
         <div class="flex items-center justify-between pt-2">
-          <span class="text-xs text-slate-500 font-medium">
-            <i class="fas fa-building mr-1 text-slate-400"></i>{{ post.department | default: 'সরকারি বিভাগ' }}
+          <span class="text-xs text-slate-500 font-medium truncate max-w-[200px] sm:max-w-none">
+            <i class="fas fa-building mr-1 text-slate-400"></i>{{ post.department | default: 'Govt Department' }}
           </span>
-          <a href="{{ site.baseurl }}{{ post.url }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg transition">
-            বিস্তারিত ও আবেদন <i class="fas fa-arrow-right text-[10px]"></i>
+          <a href="{{ site.baseurl }}{{ post.url }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-white bg-emerald-50 hover:bg-emerald-600 px-3.5 py-1.5 rounded-lg transition shadow-sm">
+            Details &amp; Apply <i class="fas fa-arrow-right text-[10px]"></i>
           </a>
         </div>
       </article>
       {% endfor %}
 
       <!-- No Results Found Box (Hidden by default) -->
-      <div id="noResults" class="hidden text-center py-12 bg-white rounded-xl border border-dashed border-slate-300">
-        <i class="fas fa-search text-3xl text-slate-300 mb-2"></i>
-        <p class="text-sm font-semibold text-slate-600">কোনো বিজ্ঞপ্তি খুঁজে পাওয়া যায়নি!</p>
-        <p class="text-xs text-slate-400">অন্য কোনো নাম বা বিভাগ দিয়ে অনুসন্ধান করুন।</p>
+      <div id="noResults" class="hidden text-center py-12 bg-white rounded-2xl border border-dashed border-slate-300">
+        <i class="fas fa-search text-4xl text-slate-300 mb-3"></i>
+        <p class="text-base font-bold text-slate-700">No Job Notifications Found!</p>
+        <p class="text-xs text-slate-400 mt-1">Try searching with a different keyword, state, or qualification.</p>
       </div>
     </div>
 
-    <!-- Right Column: Sidebar (Social Join & Quick Categories) -->
+    <!-- Right Column: Sidebar (Portals, Community, Qualifications) -->
     <aside class="space-y-6">
-      <!-- Community Card -->
-      <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-xl p-5 shadow-sm">
+      
+      <!-- Community Join Card -->
+      <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 text-white rounded-2xl p-5 shadow-md border border-slate-700/50">
         <div class="flex items-center gap-2 mb-2">
-          <i class="fas fa-bell text-amber-400 text-lg"></i>
-          <h3 class="font-bold text-base">সবার আগে চাকরির খবর পান</h3>
+          <i class="fas fa-bell text-amber-400 text-lg animate-bounce"></i>
+          <h3 class="font-bold text-base font-display">Instant Job Alerts</h3>
         </div>
         <p class="text-xs text-slate-300 mb-4 leading-relaxed">
-          প্রতিটি সরকারি চাকরির বিজ্ঞপ্তি প্রকাশের সাথে সাথে আপনার মোবাইলে সরাসরি নোটিফিকেশন পেতে যুক্ত হন:
+          Never miss a Sarkari Naukri deadline! Get instant recruitment alerts directly on your device:
         </p>
         <div class="space-y-2">
           {% if site.author.facebook %}
-          <a href="{{ site.author.facebook }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition shadow">
-            <i class="fab fa-facebook-f"></i> ফেসবুক পেজে ফলো করুন
+          <a href="{{ site.author.facebook }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition shadow">
+            <i class="fab fa-facebook-f"></i> Follow on Facebook
           </a>
           {% endif %}
           {% if site.author.telegram %}
-          <a href="{{ site.author.telegram }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold rounded-lg transition shadow">
-            <i class="fab fa-telegram-plane"></i> টেলিগ্রাম চ্যানেলে জয়েন করুন
+          <a href="{{ site.author.telegram }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold rounded-xl transition shadow">
+            <i class="fab fa-telegram-plane"></i> Join Telegram Channel
           </a>
           {% endif %}
           {% if site.author.whatsapp %}
-          <a href="{{ site.author.whatsapp }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg transition shadow">
-            <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ গ্রুপে যুক্ত হন
+          <a href="{{ site.author.whatsapp }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition shadow">
+            <i class="fab fa-whatsapp"></i> Join WhatsApp Group
           </a>
           {% endif %}
         </div>
       </div>
 
-      <!-- Quick Portals Links -->
-      <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-        <h3 class="font-bold text-slate-800 text-sm mb-3 pb-2 border-b border-slate-100 flex items-center gap-1.5">
-          <i class="fas fa-external-link-alt text-emerald-600 text-xs"></i> প্রধান অফিশিয়াল পোর্টাল
+      <!-- Verified National Portals Links -->
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <h3 class="font-bold text-slate-800 text-sm mb-3 pb-2 border-b border-slate-100 flex items-center gap-1.5 font-display">
+          <i class="fas fa-shield-alt text-emerald-600 text-xs"></i> Official Recruitment Portals
         </h3>
         <ul class="text-xs space-y-2.5 text-slate-600 font-medium">
-          <li><a href="https://psc.wb.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center"><span>পশ্চিমবঙ্গ পিএসসি (WBPSC)</span> <i class="fas fa-chevron-right text-[10px] text-slate-400"></i></a></li>
-          <li><a href="https://prb.wb.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center"><span>পশ্চিমবঙ্গ পুলিশ বোর্ড (WBPRB)</span> <i class="fas fa-chevron-right text-[10px] text-slate-400"></i></a></li>
-          <li><a href="https://ssc.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center"><span>স্টাফ সিলেকশন কমিশন (SSC)</span> <i class="fas fa-chevron-right text-[10px] text-slate-400"></i></a></li>
-          <li><a href="https://www.rrbapply.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center"><span>রেলওয়ে রিক্রুটমেন্ট (RRB)</span> <i class="fas fa-chevron-right text-[10px] text-slate-400"></i></a></li>
-          <li><a href="https://employmentnews.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center"><span>এমপ্লয়মেন্ট নিউজ ইন্ডিয়া</span> <i class="fas fa-chevron-right text-[10px] text-slate-400"></i></a></li>
+          <li><a href="https://upsc.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center py-1"><span>Union Public Service Commission (UPSC)</span> <i class="fas fa-external-link-alt text-[10px] text-slate-400"></i></a></li>
+          <li><a href="https://ssc.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center py-1"><span>Staff Selection Commission (SSC)</span> <i class="fas fa-external-link-alt text-[10px] text-slate-400"></i></a></li>
+          <li><a href="https://www.rrbapply.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center py-1"><span>Railway Recruitment Boards (RRB)</span> <i class="fas fa-external-link-alt text-[10px] text-slate-400"></i></a></li>
+          <li><a href="https://www.ibps.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center py-1"><span>Institute of Banking Personnel (IBPS)</span> <i class="fas fa-external-link-alt text-[10px] text-slate-400"></i></a></li>
+          <li><a href="https://employmentnews.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center py-1"><span>Employment News India (Official)</span> <i class="fas fa-external-link-alt text-[10px] text-slate-400"></i></a></li>
+          <li><a href="https://psc.wb.gov.in" target="_blank" rel="noopener" class="hover:text-emerald-600 flex justify-between items-center py-1"><span>West Bengal PSC (WBPSC)</span> <i class="fas fa-external-link-alt text-[10px] text-slate-400"></i></a></li>
         </ul>
       </div>
+
+      <!-- Quick Jobs by Qualification -->
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <h3 class="font-bold text-slate-800 text-sm mb-3 pb-2 border-b border-slate-100 flex items-center gap-1.5 font-display">
+          <i class="fas fa-graduation-cap text-emerald-600 text-xs"></i> Jobs by Qualification
+        </h3>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="#tenth-pass" class="p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-100 font-semibold text-center transition">
+            10th Pass Jobs
+          </a>
+          <a href="#twelfth-pass" class="p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-100 font-semibold text-center transition">
+            12th Pass Jobs
+          </a>
+          <a href="#iti-diploma" class="p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-100 font-semibold text-center transition">
+            ITI / Diploma
+          </a>
+          <a href="#graduate-jobs" class="p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-100 font-semibold text-center transition">
+            Graduate Degree
+          </a>
+        </div>
+      </div>
+
     </aside>
   </div>
 </section>

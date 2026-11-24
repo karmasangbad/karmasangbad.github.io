@@ -8,12 +8,15 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
+from scrapers.ssc_scraper import get_ssc_notices
+from scrapers.upsc_scraper import get_upsc_notices
+from scrapers.rrb_scraper import get_rrb_notices
+from scrapers.bank_scraper import get_bank_notices
+from scrapers.employment_news_scraper import get_employment_news_notices
 from scrapers.wbpsc_scraper import get_wbpsc_notices
 from scrapers.wbprb_scraper import get_wbprb_notices
-from scrapers.ssc_scraper import get_ssc_notices
-from scrapers.employment_news_scraper import get_employment_news_notices
 from scrapers.karmasangsthan_scraper import get_all_karmasangsthan_notices
-from gemini_formatter import format_job_to_bengali_markdown
+from gemini_formatter import format_job_to_markdown
 from fb_publisher import auto_publish_job_to_fb
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,49 +42,73 @@ def run_pipeline():
     seen_ids = set(history.get("seen_ids", []))
 
     print(f"[Runner] Loaded {len(seen_ids)} previously processed notices.")
-    print("[Runner] Starting scraping from official portals...")
+    print("[Runner] Starting All-India scraping from Central & State official portals...")
 
     all_notices = []
     
-    # 1. WBPSC
+    # 1. Staff Selection Commission (SSC) - Central
     try:
-        wbpsc = get_wbpsc_notices(limit=10)
-        print(f"[Runner] Fetched {len(wbpsc)} notices from WBPSC.")
-        all_notices.extend(wbpsc)
-    except Exception as e:
-        print(f"[Runner] WBPSC error: {e}")
-
-    # 2. WBPRB
-    try:
-        wbprb = get_wbprb_notices(limit=10)
-        print(f"[Runner] Fetched {len(wbprb)} notices from WBPRB.")
-        all_notices.extend(wbprb)
-    except Exception as e:
-        print(f"[Runner] WBPRB error: {e}")
-
-    # 3. SSC
-    try:
-        ssc = get_ssc_notices(limit=3)
+        ssc = get_ssc_notices(limit=5)
         print(f"[Runner] Fetched {len(ssc)} notices from SSC.")
         all_notices.extend(ssc)
     except Exception as e:
         print(f"[Runner] SSC error: {e}")
 
-    # 4. Employment News
+    # 2. Union Public Service Commission (UPSC) - Central
     try:
-        emp = get_employment_news_notices(limit=3)
+        upsc = get_upsc_notices(limit=5)
+        print(f"[Runner] Fetched {len(upsc)} notices from UPSC.")
+        all_notices.extend(upsc)
+    except Exception as e:
+        print(f"[Runner] UPSC error: {e}")
+
+    # 3. Railway Recruitment Boards (RRB) - Central / Railways
+    try:
+        rrb = get_rrb_notices(limit=5)
+        print(f"[Runner] Fetched {len(rrb)} notices from RRB.")
+        all_notices.extend(rrb)
+    except Exception as e:
+        print(f"[Runner] RRB error: {e}")
+
+    # 4. Banking & Financial Sector (IBPS) - Central / Banking
+    try:
+        banks = get_bank_notices(limit=5)
+        print(f"[Runner] Fetched {len(banks)} notices from IBPS.")
+        all_notices.extend(banks)
+    except Exception as e:
+        print(f"[Runner] IBPS error: {e}")
+
+    # 5. Employment News India - Central
+    try:
+        emp = get_employment_news_notices(limit=5)
         print(f"[Runner] Fetched {len(emp)} notices from Employment News.")
         all_notices.extend(emp)
     except Exception as e:
         print(f"[Runner] Employment News error: {e}")
 
-    # 5. Karmasangsthan Online (Weekly Paper & News)
+    # 6. West Bengal Public Service Commission (WBPSC) - State
+    try:
+        wbpsc = get_wbpsc_notices(limit=5)
+        print(f"[Runner] Fetched {len(wbpsc)} notices from WBPSC.")
+        all_notices.extend(wbpsc)
+    except Exception as e:
+        print(f"[Runner] WBPSC error: {e}")
+
+    # 7. West Bengal Police Recruitment Board (WBPRB) - State Defence & Police
+    try:
+        wbprb = get_wbprb_notices(limit=5)
+        print(f"[Runner] Fetched {len(wbprb)} notices from WBPRB.")
+        all_notices.extend(wbprb)
+    except Exception as e:
+        print(f"[Runner] WBPRB error: {e}")
+
+    # 8. Weekly Job Newspapers (Karmasangsthan & Karmakshetra)
     try:
         ks_papers = get_all_karmasangsthan_notices()
-        print(f"[Runner] Fetched {len(ks_papers)} editions from karmasangsthan.online.")
+        print(f"[Runner] Fetched {len(ks_papers)} editions from weekly papers.")
         all_notices.extend(ks_papers)
     except Exception as e:
-        print(f"[Runner] Karmasangsthan error: {e}")
+        print(f"[Runner] Weekly papers error: {e}")
 
     new_posts_count = 0
     today_str = datetime.now().strftime("%Y-%m-%d")
@@ -92,12 +119,11 @@ def run_pipeline():
             continue
 
         print(f"[Runner] Processing new notice: {notice['title'][:60]}...")
-        slug, markdown_content = format_job_to_bengali_markdown(notice)
+        slug, markdown_content = format_job_to_markdown(notice)
 
         filename = f"{today_str}-{slug}.md"
         filepath = os.path.join(POSTS_DIR, filename)
 
-        # Avoid accidental overwrite if file exists with same name
         counter = 1
         while os.path.exists(filepath):
             filepath = os.path.join(POSTS_DIR, f"{today_str}-{slug}-{counter}.md")
@@ -108,7 +134,6 @@ def run_pipeline():
 
         print(f"[Runner] Saved: _posts/{os.path.basename(filepath)}")
 
-        # Construct article link & auto-publish to Facebook
         article_url = f"https://karmasangbad.github.io/"
         try:
             auto_publish_job_to_fb(notice, article_url, slug)
