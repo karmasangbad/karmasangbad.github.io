@@ -5,6 +5,12 @@ import tempfile
 import subprocess
 import requests
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    pass
+
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(CURRENT_DIR)
 BANNERS_DIR = os.path.join(BASE_DIR, "assets", "banners")

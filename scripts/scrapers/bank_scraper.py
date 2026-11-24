@@ -35,13 +35,16 @@ def get_bank_notices(limit=5):
             return notices
 
         soup = BeautifulSoup(response.text, "html.parser")
-        keywords = ["crp", "recruitment", "officer", "clerk", "po", "specialist", "notification", "admit card", "result"]
+        keywords = ["crp", "recruitment", "specialist", "clerk", "po", "probationary", "officer", "customer service"]
+        exclude = ["csr", "policies", "rules", "guidelines", "disclaimer", "privacy", "tender", "vendor", "about"]
 
         for a in soup.find_all("a", href=True):
             title = a.get_text(strip=True)
             href = a["href"].strip()
 
-            if len(title) > 20 and any(k in title.lower() for k in keywords):
+            if len(title) > 10 and any(k in title.lower() for k in keywords):
+                if any(x in title.lower() or x in href.lower() for x in exclude):
+                    continue
                 if href.startswith("/"):
                     full_link = f"https://www.ibps.in{href}"
                 elif href.startswith("http"):

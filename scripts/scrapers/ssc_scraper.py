@@ -2,72 +2,72 @@ import ssl
 import urllib3
 import requests
 import hashlib
-from requests.adapters import HTTPAdapter
 from bs4 import BeautifulSoup
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-class LegacySSLAdapter(HTTPAdapter):
-    def init_poolmanager(self, *args, **kwargs):
-        ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
-        ctx.options |= 0x4
-        kwargs['ssl_context'] = ctx
-        return super().init_poolmanager(*args, **kwargs)
-
-def get_ssc_notices(limit=5):
+def get_ssc_notices(limit=8):
     """
-    Scrapes latest notifications from Staff Selection Commission (SSC).
+    Scrapes the latest notices and notifications from Staff Selection Commission.
+    Uses SSC official regional and central portals for direct PDF links.
     """
-    url = "https://ssc.gov.in"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
 
-    session = requests.Session()
-    session.mount("https://", LegacySSLAdapter())
-
     notices = []
+    
+    # Primary Source: SSC Official Portal via SSCER (direct links to ssc.gov.in PDF attachments)
     try:
-        response = session.get(url, headers=headers, timeout=8)
-        if response.status_code != 200:
-            return notices
+        url = "https://www.sscer.org"
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, "html.parser")
+            keywords = ["notice", "examination", "cgl", "chsl", "mts", "constable", "recruitment", "schedule", "shortlisted", "admit"]
+            skip_words = ["tender", "cleaning", "pest", "vehicle", "car hiring"]
 
-        soup = BeautifulSoup(response.text, "html.parser")
-        keywords = ["notice", "examination", "cgl", "chsl", "mts", "constable", "recruitment", "declaration", "schedule"]
+            for a in soup.find_all("a", href=True):
+                title = a.get_text(strip=True)
+                href = a["href"].strip()
 
-        for a in soup.find_all("a", href=True):
-            title = a.get_text(strip=True)
-            href = a["href"].strip()
+                if len(title) > 25 and any(k in title.lower() for k in keywords):
+                    if any(s in title.lower() for s in skip_words):
+                        continue
 
-            if len(title) > 20 and any(k in title.lower() for k in keywords):
-                if href.startswith("/"):
-                    full_link = f"https://ssc.gov.in{href}"
-                elif href.startswith("http"):
-                    full_link = href
-                else:
-                    full_link = f"https://ssc.gov.in/{href}"
+                    # Resolve full URL
+                    if href.startswith("/"):
+                        full_link = f"https://www.sscer.org{href}"
+                    elif href.startswith("http"):
+                        full_link = href
+                    else:
+                        full_link = f"https://www.sscer.org/{href}"
 
-                notice_id = f"ssc_{hashlib.md5(title.encode('utf-8')).hexdigest()[:12]}"
+                    # Clean title from Hindi duplicate if present
+                    if "महत्वपूर्ण सूचना" in title or "नोटिस" in title:
+                        title_clean = title.split("महत्वपूर्ण")[0].strip()
+                        if not title_clean:
+                            title_clean = title
+                    else:
+                        title_clean = title
 
-                notices.append({
-                    "id": notice_id,
-                    "title": title,
-                    "official_link": "https://ssc.gov.in",
-                    "apply_link": "https://ssc.gov.in",
-                    "pdf_link": full_link,
-                    "department": "Staff Selection Commission (SSC)",
-                    "category": "Central Govt Jobs",
-                    "state": "All India",
-                    "source": "SSC"
-                })
+                    notice_id = f"ssc_{hashlib.md5(title_clean.encode('utf-8')).hexdigest()[:12]}"
 
-                if len(notices) >= limit:
-                    break
+                    notices.append({
+                        "id": notice_id,
+                        "title": title_clean,
+                        "department": "Staff Selection Commission (SSC)",
+                        "category": "Central Govt Jobs",
+                        "state": "All India",
+                        "official_link": "https://ssc.gov.in",
+                        "apply_link": "https://ssc.gov.in",
+                        "pdf_link": full_link,
+                        "source": "SSC"
+                    })
 
+                    if len(notices) >= limit:
+                        break
     except Exception as e:
-        print(f"[SSC] Error scraping: {e}")
+        print(f"[SSC Scraper] Notice error: {e}")
 
     return notices
 

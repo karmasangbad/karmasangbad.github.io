@@ -3,6 +3,12 @@ import sys
 import json
 from datetime import datetime
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    pass
+
 # Ensure scripts directory is in python module search path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
