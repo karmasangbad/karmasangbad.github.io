@@ -14,6 +14,7 @@ author:
 
 # Build Settings
 markdown: kramdown
+permalink: /:year/:month/:day/:title.html
 kramdown:
   input: GFM
   syntax_highlighter: rouge

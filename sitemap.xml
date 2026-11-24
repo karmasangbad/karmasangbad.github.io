@@ -11,7 +11,7 @@ layout: null
     <priority>1.0</priority>
   </url>
 
-  <!-- Key Pages -->
+  <!-- Key Static Pages -->
   <url>
     <loc>{{ site.url }}/privacy-policy.html</loc>
     <changefreq>monthly</changefreq>
@@ -28,10 +28,10 @@ layout: null
     <priority>0.4</priority>
   </url>
 
-  <!-- Job Posts -->
+  <!-- All Government Job Notifications -->
   {% for post in site.posts %}
   <url>
-    <loc>{{ site.url }}{{ post.url }}</loc>
+    <loc>{{ site.url }}{{ post.url | xml_escape }}</loc>
     <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
